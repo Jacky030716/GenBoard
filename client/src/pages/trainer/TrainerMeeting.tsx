@@ -5,6 +5,7 @@ import {
 import { Header } from "@/features/trainer/components/Header";
 import { useCreateMeeting } from "@/features/trainer/hooks/use-create-meeting";
 import { format } from "date-fns";
+import { useGetTrainees } from "@/features/trainer/hooks/trainee/use-get-trainees";
 
 const exampleTrainees = [
   { id: "1", name: "John Doe" },
@@ -15,6 +16,9 @@ const exampleTrainees = [
 
 const TrainerMeeting = () => {
   const createMeeting = useCreateMeeting();
+  const traineesQuery = useGetTrainees();
+
+  console.log("Trainees:", traineesQuery.data);
 
   const handleSubmit = async (data: MeetingFormValues) => {
     createMeeting.mutate(

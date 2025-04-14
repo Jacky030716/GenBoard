@@ -1,5 +1,5 @@
 import { Separator } from "@/components/ui/separator";
-import { Profile } from "./Profile";
+import { Profile } from "@/components/Profile";
 import { NavLink, useLocation } from "react-router";
 import { cn } from "@/lib/utils";
 import { LayoutGrid, Users } from "lucide-react";
