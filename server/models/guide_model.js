@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const quizSchema = new mongoose.Schema({
-    quiz_id: {
+const guideSchema = new mongoose.Schema({
+    guide_id: {
         type: String,
         required: true
     },
@@ -13,14 +13,15 @@ const quizSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    total_questions: {
-        type: Number,
+    estimated_time: {
+        type: String,
         required: true
     },
-    passing_score: {
-        type: Number,
+    prerequisites: {
+        type: [String],
         required: true
     }
+
 });
 
-module.exports = mongoose.model("Quiz", quizSchema);
+module.exports = mongoose.model("Guide", guideSchema);
