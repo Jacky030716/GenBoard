@@ -5,7 +5,6 @@ import "./index.css";
 import { Route, BrowserRouter as Router, Routes } from "react-router";
 import SignIn from "./pages/SignIn.tsx";
 import SignUp from "./pages/SignUp.tsx";
-import TraineeDashboard from "./pages/trainee/TraineeDashboard.tsx";
 import TraineeOnboarding from "./pages/trainee/TraineeOnboarding.tsx";
 import AuthLayout from "./layouts/AuthLayout.tsx";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage.tsx";
@@ -13,6 +12,10 @@ import ResetPasswordPage from "./pages/ResetPasswordPage.tsx";
 import TraineeSignUp from "./pages/trainee/TraineeSignUp.tsx";
 import TrainerSignUp from "./pages/trainer/TrainerSignUp.tsx";
 import RootLayout from "./layouts/RootLayout.tsx";
+import TrainerDashboard from "./pages/trainer/TrainerDashboard.tsx";
+import TrainerMeeting from "./pages/trainer/TrainerMeeting.tsx";
+import TraineeDashboard from "./pages/trainee/TraineeDashboard.tsx";
+import TraineeEvaluationPage from "./pages/trainer/TraineeEvaluationPage.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -38,9 +41,12 @@ createRoot(document.getElementById("root")!).render(
         <Route path="trainer" element={<RootLayout />}>
           <Route path="signup" element={<TrainerSignUp />} />
 
-          <Route path="dashboard" element={<TraineeDashboard />} />
-          <Route path="onboarding" element={<TraineeOnboarding />} />
-          <Route path="meetings" element={<TraineeOnboarding />} />
+          <Route path="dashboard" element={<TrainerDashboard />} />
+          <Route path="create-meeting" element={<TrainerMeeting />} />
+          <Route
+            path="evaluation/:traineeId"
+            element={<TraineeEvaluationPage />}
+          />
         </Route>
       </Routes>
     </Router>

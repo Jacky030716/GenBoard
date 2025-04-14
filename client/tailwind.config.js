@@ -8,6 +8,10 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        montserrat: ["Montserrat", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
+      },
       maxWidth: {
         "8xl": "1440px",
       },
@@ -25,10 +29,13 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         black: {
+          DEFAULT: "#000000",
+          600: "#2A2D3799",
           700: "#252526",
         },
         background: {
           DEFAULT: "#200706",
+          light: "#FFF7F7",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",

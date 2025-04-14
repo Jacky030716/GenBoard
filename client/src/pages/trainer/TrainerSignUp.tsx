@@ -1,5 +1,4 @@
 import { TrainerIllustration } from "@/assets";
-import { ImageUploadModal } from "@/features/auth/components/ImageUploadModal";
 import TrainerSignUpForm from "@/features/auth/components/TrainerSignUpForm";
 
 const TrainerSignUp = () => {
