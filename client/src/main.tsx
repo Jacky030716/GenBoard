@@ -1,8 +1,9 @@
+import "./index.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
-
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, BrowserRouter as Router, Routes } from "react-router";
+
 import SignIn from "./pages/SignIn.tsx";
 import SignUp from "./pages/SignUp.tsx";
 import TraineeOnboarding from "./pages/trainee/TraineeOnboarding.tsx";
@@ -16,7 +17,8 @@ import TrainerDashboard from "./pages/trainer/TrainerDashboard.tsx";
 import TrainerMeeting from "./pages/trainer/TrainerMeeting.tsx";
 import TraineeDashboard from "./pages/trainee/TraineeDashboard.tsx";
 import TraineeEvaluationPage from "./pages/trainer/TraineeEvaluationPage.tsx";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import TraineeFeedback from "./pages/trainee/TraineeFeedback.tsx";
+import TraineeSchedule from "./pages/trainee/TraineeSchedule.tsx";
 
 export const queryClient = new QueryClient();
 
@@ -39,7 +41,8 @@ createRoot(document.getElementById("root")!).render(
 
             <Route path="dashboard" element={<TraineeDashboard />} />
             <Route path="onboarding" element={<TraineeOnboarding />} />
-            <Route path="meetings" element={<TraineeOnboarding />} />
+            <Route path="schedule" element={<TraineeSchedule />} />
+            <Route path="feedback" element={<TraineeFeedback />} />
           </Route>
 
           <Route path="trainer" element={<RootLayout />}>

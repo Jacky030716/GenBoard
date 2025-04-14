@@ -1,6 +1,7 @@
 import { TraineeSidebar } from "@/features/trainee/components/TraineeSidebar";
+import { FeedbackMainSection } from "@/features/trainee/feedback/FeedbackMainSection";
 
-const TraineeDashboard = () => {
+const TraineeFeedback = () => {
   return (
     <div className="w-full flex-1 flex">
       {/* Sidebar */}
@@ -8,10 +9,10 @@ const TraineeDashboard = () => {
 
       {/* Main Content */}
       <main className="bg-[#FFF7F7] flex-1">
-        {/* <TrainerMainSection /> */}
+        <FeedbackMainSection />
       </main>
     </div>
   );
 };
 
-export default TraineeDashboard;
+export default TraineeFeedback;
