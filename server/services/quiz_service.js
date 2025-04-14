@@ -1,12 +1,11 @@
-const Quiz = require("../models/quiz_model");
-const QuizQuestion = require("../models/quiz_question_model");
+const quizRepository = require("../repositories/quiz_repository");
 
 const quizService = {
     getQuiz: async () => {
-        return await Quiz.find({});
+        return await quizRepository.findAll();
     },
     getQuizQuestion: async (quiz_id) => {
-        return await QuizQuestion.find({}).where({ quiz_id: quiz_id });
+        return await quizRepository.findQuizQuestion(quiz_id);
     },
     
 };
