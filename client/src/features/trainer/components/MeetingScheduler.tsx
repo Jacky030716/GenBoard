@@ -29,51 +29,12 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { Input } from "@/components/ui/input";
+import { meetingFormSchema } from "@/lib/schema";
+import { timeSlots } from "@/constants";
 
-// Schema for meeting form
-const meetingFormSchema = z.object({
-  date: z.date({
-    required_error: "Please select a date for the meeting.",
-  }),
-  time: z.string({
-    required_error: "Please select a time for the meeting.",
-  }),
-  traineeId: z.string({
-    required_error: "Please select a trainee to invite.",
-  }),
-  purpose: z
-    .string()
-    .min(5, {
-      message: "Purpose must be at least 5 characters.",
-    })
-    .max(300, {
-      message: "Purpose must not exceed 300 characters.",
-    }),
-});
+export type MeetingFormValues = z.infer<typeof meetingFormSchema>;
 
-type MeetingFormValues = z.infer<typeof meetingFormSchema>;
-
-const timeSlots = [
-  "09:00 AM",
-  "09:30 AM",
-  "10:00 AM",
-  "10:30 AM",
-  "11:00 AM",
-  "11:30 AM",
-  "12:00 PM",
-  "12:30 PM",
-  "01:00 PM",
-  "01:30 PM",
-  "02:00 PM",
-  "02:30 PM",
-  "03:00 PM",
-  "03:30 PM",
-  "04:00 PM",
-  "04:30 PM",
-  "05:00 PM",
-];
-
-// Props for the MeetingScheduler component
 interface MeetingSchedulerProps {
   trainees: { id: string; name: string }[];
   onSubmit: (data: MeetingFormValues) => void;
@@ -94,11 +55,18 @@ export const MeetingScheduler = ({
   const form = useForm<MeetingFormValues>({
     resolver: zodResolver(meetingFormSchema),
     defaultValues: {
+      date: new Date(),
+      host: "1234567",
+      time: "",
+      title: "",
+      participants: "",
       purpose: "",
     },
   });
 
   const handleSubmit = (values: MeetingFormValues) => {
+    console.log(values);
+
     onSubmit(values);
   };
 
@@ -207,12 +175,31 @@ export const MeetingScheduler = ({
             />
           </div>
 
+          {/* Meeting Title */}
+          <div className="flex items-center justify-between">
+            <FormLabel className="text-sm font-medium">Title</FormLabel>
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem className="flex-1 ml-[50px]">
+                  <Input
+                    placeholder="Enter meeting title..."
+                    className="w-full pl-3 text-left font-normal border-0 border-b border-gray-300 rounded-none bg-[#f0fafc] h-12"
+                    {...field}
+                  />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
           {/* Trainee Selection Field */}
           <div className="flex items-center justify-between">
             <FormLabel className="text-sm font-medium">Invite</FormLabel>
             <FormField
               control={form.control}
-              name="traineeId"
+              name="participants"
               render={({ field }) => (
                 <FormItem className="flex-1 ml-11">
                   <Select

@@ -3,6 +3,7 @@ const meetingService = require("../services/meeting_service");
 const meetingController = {
   createMeeting: async (req, res) => {
     const { date, time, title, host, participants, purpose } = req.body;
+
     try {
       const newMeeting = await meetingService.createMeeting({
         date,

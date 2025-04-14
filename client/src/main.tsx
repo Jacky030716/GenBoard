@@ -16,39 +16,44 @@ import TrainerDashboard from "./pages/trainer/TrainerDashboard.tsx";
 import TrainerMeeting from "./pages/trainer/TrainerMeeting.tsx";
 import TraineeDashboard from "./pages/trainee/TraineeDashboard.tsx";
 import TraineeEvaluationPage from "./pages/trainer/TraineeEvaluationPage.tsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+export const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Router>
-      <Routes>
-        {/* <Route index element={<App />} /> */}
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <Routes>
+          {/* <Route index element={<App />} /> */}
 
-        <Route element={<AuthLayout />}>
-          <Route path="/" element={<SignIn />} />
-          <Route path="sign-up" element={<SignUp />} />
-          <Route path="forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="reset-password" element={<ResetPasswordPage />} />
-        </Route>
+          <Route element={<AuthLayout />}>
+            <Route path="/" element={<SignIn />} />
+            <Route path="sign-up" element={<SignUp />} />
+            <Route path="forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="reset-password" element={<ResetPasswordPage />} />
+          </Route>
 
-        <Route path="trainee" element={<RootLayout />}>
-          <Route path="signup" element={<TraineeSignUp />} />
+          <Route path="trainee" element={<RootLayout />}>
+            <Route path="signup" element={<TraineeSignUp />} />
 
-          <Route path="dashboard" element={<TraineeDashboard />} />
-          <Route path="onboarding" element={<TraineeOnboarding />} />
-          <Route path="meetings" element={<TraineeOnboarding />} />
-        </Route>
+            <Route path="dashboard" element={<TraineeDashboard />} />
+            <Route path="onboarding" element={<TraineeOnboarding />} />
+            <Route path="meetings" element={<TraineeOnboarding />} />
+          </Route>
 
-        <Route path="trainer" element={<RootLayout />}>
-          <Route path="signup" element={<TrainerSignUp />} />
+          <Route path="trainer" element={<RootLayout />}>
+            <Route path="signup" element={<TrainerSignUp />} />
 
-          <Route path="dashboard" element={<TrainerDashboard />} />
-          <Route path="create-meeting" element={<TrainerMeeting />} />
-          <Route
-            path="evaluation/:traineeId"
-            element={<TraineeEvaluationPage />}
-          />
-        </Route>
-      </Routes>
-    </Router>
+            <Route path="dashboard" element={<TrainerDashboard />} />
+            <Route path="create-meeting" element={<TrainerMeeting />} />
+            <Route
+              path="evaluation/:traineeId"
+              element={<TraineeEvaluationPage />}
+            />
+          </Route>
+        </Routes>
+      </Router>
+    </QueryClientProvider>
   </StrictMode>
 );

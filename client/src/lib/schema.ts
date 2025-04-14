@@ -77,3 +77,32 @@ export const traineeFormSchema = z.object({
   department: z.string().min(1, { message: "Please select a department." }),
   profileImage: z.string().optional(),
 });
+
+// This schema is used to validate the create meeting form data (Trainer)
+export const meetingFormSchema = z.object({
+  date: z.date({
+    required_error: "Please select a date for the meeting.",
+  }),
+  host: z.string({
+    required_error: "Host is required.",
+  }),
+  time: z.string({
+    required_error: "Please select a time for the meeting.",
+  }),
+  title: z
+    .string({
+      required_error: "Please enter a title for the meeting.",
+    })
+    .min(10, "Title must be at least 10 characters."),
+  participants: z.string({
+    required_error: "Please select a trainee to invite.",
+  }),
+  purpose: z
+    .string()
+    .min(5, {
+      message: "Purpose must be at least 5 characters.",
+    })
+    .max(300, {
+      message: "Purpose must not exceed 300 characters.",
+    }),
+});
