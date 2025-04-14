@@ -12,10 +12,10 @@ app.use(bodyParser.json());
 
 app.use("/api", routes);
 
-// mongoose.connect(process.env.MONGODB_URI)
-// .then(() => {
-//   app.listen(8888, () => {
-//     console.log('Server running on port 8888');
-//   });
-// })
-// .catch(err => console.error('Error connecting to MongoDB:', err));
+mongoose.connect(process.env.MONGODB_URI)
+.then(() => {
+  app.listen(8888, () => {
+    console.log('Server running on port 8888');
+  });
+})
+.catch(err => console.error('Error connecting to MongoDB:', err));
