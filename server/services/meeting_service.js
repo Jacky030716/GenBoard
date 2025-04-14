@@ -1,17 +1,16 @@
-const Meeting = require("../models/meeting_model");
+const meetingRepository = require("../repositories/meeting_repository")
 
 const meetingService = {
     createMeeting: async (data) => {
-        const newMeeting = new Meeting(data);
-        return await newMeeting.save();
+        return await meetingRepository.createMeeting(data)
     },
 
     getMeetingsByHost: async (uid) => {
-        return await Meeting.find({ host: uid });
+        return await meetingRepository.getMeetingsByHost(uid)
     },
 
     getMeetingsByParticipant: async (uid) => {
-        return await Meeting.find({ participants: uid });
+        return await meetingRepository.getMeetingsByParticipant(uid)
     }
 };
 
