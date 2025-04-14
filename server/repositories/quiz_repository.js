@@ -7,7 +7,7 @@ const quizRepository = {
     },
     findQuizQuestion: async (quiz_id) => {
         return await QuizQuestion.find({}).where({ quiz_id: quiz_id });
-    },
+    }
 };
 
 module.exports = quizRepository;
