@@ -10,9 +10,10 @@ const onboardingController = {
             res.status(400).json({ message: error.message });
         }
     },
-    getAllOnboarding: async (req, res) => {
+    getDepartmentOnboarding: async (req, res) => {
         try {
-            const response = await onboardingService.getAllOnboarding();
+            const department = req.params.department;
+            const response = await onboardingService.getDepartmentOnboarding(department);
             res.status(200).json(response);
         } catch (error) {
             res.status(400).json({ message: error.message });

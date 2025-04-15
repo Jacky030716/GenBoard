@@ -4,8 +4,8 @@ const onboardingService = {
     getOnboarding: async (uid) => {
         return await OnboardingRepository.findById(uid);
     },
-    getAllOnboarding: async () => {
-        return await OnboardingRepository.getAll();
+    getDepartmentOnboarding: async (department) => {
+        return await OnboardingRepository.getDepartmentOnboarding(department);
     }
 }
 
