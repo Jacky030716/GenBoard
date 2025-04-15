@@ -40,12 +40,17 @@ export const problemTypes = [
   { id: "other", name: "Other" },
 ];
 
-export const FeedbackForm = () => {
+interface FeedbackFormProps {
+  email: string;
+  name: string;
+}
+
+export const FeedbackForm = ({ email, name }: FeedbackFormProps) => {
   const form = useForm<feedbackFormValues>({
     resolver: zodResolver(feedbackFormSchema),
     defaultValues: {
-      email: "",
-      name: "",
+      email,
+      name,
       problemType: "",
       feedback: "",
     },
@@ -68,7 +73,7 @@ export const FeedbackForm = () => {
               {/* Name input */}
               <div className="flex items-center justify-between gap-12">
                 <FormLabel className="font-medium w-1/5 font-poppins text-black-100">
-                  Title
+                  Name
                 </FormLabel>
                 <FormField
                   control={form.control}

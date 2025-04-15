@@ -17,6 +17,8 @@ const badgeVariants = cva(
         outline: "text-foreground",
         progress:
           "bg-[#FEFFB9] border-[#ACB02C] text-[#73753C] py-2 px-4 font-poppins",
+        completed:
+          "bg-[#16C09861] border-[#00B087] text-[#008767] py-2 px-4 font-poppins",
       },
     },
     defaultVariants: {

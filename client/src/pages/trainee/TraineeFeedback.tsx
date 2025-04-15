@@ -3,9 +3,11 @@ import { FeedbackMainSection } from "@/features/trainee/feedback/FeedbackMainSec
 
 const TraineeFeedback = () => {
   return (
-    <div className="w-full flex-1 flex">
+    <div className="flex h-full">
       {/* Sidebar */}
-      <TraineeSidebar />
+      <div className="w-[300px] flex-shrink-0">
+        <TraineeSidebar />
+      </div>
 
       {/* Main Content */}
       <main className="bg-[#FFF7F7] flex-1">

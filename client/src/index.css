@@ -22,6 +22,16 @@ body {
   min-height: 100vh;
 }
 
+.onboarding-gradient {
+  border-image-source: linear-gradient(138.29deg, rgba(1, 183, 197, 0.7) -6.3%, rgba(120, 44, 150, 0.7) 103.83%);
+  border-image-slice: 1;
+  border-image-width: 1px;  
+}
+
+.onboarding-shadow {
+  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.5);
+}
+
 /* button {
   border-radius: 8px;
   border: 1px solid transparent;
