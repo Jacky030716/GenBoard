@@ -19,11 +19,15 @@ import TraineeDashboard from "./pages/trainee/TraineeDashboard.tsx";
 import TraineeEvaluationPage from "./pages/trainer/TraineeEvaluationPage.tsx";
 import TraineeFeedback from "./pages/trainee/TraineeFeedback.tsx";
 import TraineeSchedule from "./pages/trainee/TraineeSchedule.tsx";
+import { Toaster } from "sonner";
+import { Chatbot } from "./features/chatbot/chatbot.tsx";
+import TraineeGrade from "./pages/trainee/TraineeGrade.tsx";
 
 export const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
+    <Toaster richColors />
     <QueryClientProvider client={queryClient}>
       <Router>
         <Routes>
@@ -41,6 +45,7 @@ createRoot(document.getElementById("root")!).render(
 
             <Route path="dashboard" element={<TraineeDashboard />} />
             <Route path="onboarding" element={<TraineeOnboarding />} />
+            <Route path="onboarding/grade" element={<TraineeGrade />} />
             <Route path="schedule" element={<TraineeSchedule />} />
             <Route path="feedback" element={<TraineeFeedback />} />
           </Route>
@@ -57,6 +62,7 @@ createRoot(document.getElementById("root")!).render(
           </Route>
         </Routes>
       </Router>
+      <Chatbot />
     </QueryClientProvider>
   </StrictMode>
 );

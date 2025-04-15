@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
-import { NavLink, useLocation } from "react-router";
+import { NavLink, useLocation, useNavigate } from "react-router";
 import {
   LayoutGrid,
   LogOut,
@@ -13,19 +13,25 @@ import { Button } from "@/components/ui/button";
 
 const navlinks = [
   { name: "Home", path: "/trainee/dashboard", icon: <LayoutGrid /> },
-  { name: "Onboarding", path: "/trainee/onboarding", icon: <Package /> },
+  { name: "Onboarding Flow", path: "/trainee/onboarding", icon: <Package /> },
   { name: "Schedule", path: "/trainee/schedule", icon: <Users /> },
   { name: "Feedback", path: "/trainee/feedback", icon: <MessageSquare /> },
 ];
 
 export const TraineeSidebar = () => {
   const pathname = useLocation().pathname;
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
 
   return (
-    <nav className="w-[300px] flex flex-col items-center shadow-lg">
+    <nav className="w-full h-full flex flex-col items-center shadow-lg bg-white z-10">
       <Profile />
       <Separator />
-      <div className="flex-1 flex flex-col justify-between w-full p-8 font-poppins">
+      <div className="flex-1 flex flex-col justify-between w-full p-8 font-poppins overflow-y-auto">
         <div className="flex-1 flex flex-col gap-8">
           {navlinks.map((link) => (
             <div className="w-full relative" key={link.name}>
@@ -37,9 +43,9 @@ export const TraineeSidebar = () => {
                 )}
               >
                 {link.path === pathname && (
-                  <div className="bg-[#BFBCE9] w-[302px] h-[55px] rounded-full drop-shadow-lg shadow-[#00000040] absolute -top-1/2 -left-14 z-[-1]" />
+                  <div className="bg-[#BFBCE9] w-[302px] h-14 rounded-full drop-shadow-lg shadow-md absolute -top-1/2 -left-14 z-0" />
                 )}
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 relative z-10">
                   {link.icon && link.icon}
                   <span className="font-medium">{link.name}</span>
                 </div>
@@ -52,6 +58,7 @@ export const TraineeSidebar = () => {
         <Button
           variant="ghost"
           className="flex justify-start rounded-full text-destructive text-lg hover:text-rose-500 hover:bg-transparent w-fit gap-2 h-10 px-4"
+          onClick={handleLogout}
         >
           <LogOut />
           Logout

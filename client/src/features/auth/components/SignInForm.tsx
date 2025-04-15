@@ -13,10 +13,13 @@ import { useForm } from "react-hook-form";
 import { signInSchema } from "@/lib/schema";
 import { Button } from "@/components/ui/button";
 import { NavLink, useNavigate } from "react-router";
+import { useLoginUser } from "../hooks/use-login-user";
 
 type formSchema = z.infer<typeof signInSchema>;
 
 export const SignInForm = () => {
+  const login = useLoginUser();
+
   const navigate = useNavigate();
 
   const form = useForm({
@@ -28,7 +31,11 @@ export const SignInForm = () => {
   });
 
   const onSubmit = (data: formSchema) => {
-    navigate("/trainer/dashboard");
+    login.mutate(data, {
+      onSuccess: ({ role }) => {
+        navigate(`/${role}/dashboard`);
+      },
+    });
   };
 
   return (
