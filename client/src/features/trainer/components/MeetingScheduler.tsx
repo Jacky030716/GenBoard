@@ -3,7 +3,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Calendar as CalendarIcon, Clock, Users } from "lucide-react";
-import { format } from "date-fns";
+import { format, formatDate } from "date-fns";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -32,20 +32,20 @@ import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { meetingFormSchema } from "@/lib/schema";
 import { timeSlots } from "@/constants";
+import { useCreateMeeting } from "../hooks/use-create-meeting";
 
 export type MeetingFormValues = z.infer<typeof meetingFormSchema>;
 
 interface MeetingSchedulerProps {
   trainees: { id: string; name: string }[];
-  onSubmit: (data: MeetingFormValues) => void;
-  isLoading?: boolean;
 }
 
-export const MeetingScheduler = ({
-  trainees,
-  onSubmit,
-  isLoading = false,
-}: MeetingSchedulerProps) => {
+export const MeetingScheduler = ({ trainees }: MeetingSchedulerProps) => {
+  const uid = localStorage.getItem("uid") as string;
+  const createMeeting = useCreateMeeting();
+
+  const isLoading = createMeeting.isPending;
+
   const [open, setOpen] = useState({
     date: false,
     time: false,
@@ -56,7 +56,7 @@ export const MeetingScheduler = ({
     resolver: zodResolver(meetingFormSchema),
     defaultValues: {
       date: new Date(),
-      host: "1234567",
+      host: uid,
       time: "",
       title: "",
       participants: "",
@@ -64,10 +64,21 @@ export const MeetingScheduler = ({
     },
   });
 
-  const handleSubmit = (values: MeetingFormValues) => {
-    console.log(values);
-
-    onSubmit(values);
+  const handleSubmit = async (data: MeetingFormValues) => {
+    createMeeting.mutate(
+      {
+        ...data,
+        date: formatDate(data.date, "yyyy-MM-dd"),
+      },
+      {
+        onSuccess: () => {
+          console.log("Meeting created successfully");
+        },
+        onError: (error) => {
+          console.error("Error creating meeting:", error);
+        },
+      }
+    );
   };
 
   return (

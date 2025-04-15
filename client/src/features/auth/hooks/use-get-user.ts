@@ -1,12 +1,15 @@
 import httpClient from "@/lib/httpClient";
 import { useQuery } from "@tanstack/react-query";
 
-export const useGetUser = (uid: string) => {
+export const useGetUser = (uid: string, role: string) => {
   const query = useQuery({
     enabled: !!uid,
     queryKey: ["users", uid],
     queryFn: async () => {
-      const response = await httpClient.get(`/userTrainee/${uid}`);
+      const url =
+        role === "trainer" ? `/userTrainer/${uid}` : `/userTrainee/${uid}`;
+
+      const response = await httpClient.get(url);
 
       if (response.status !== 200) {
         throw new Error("Failed to fetch user data");

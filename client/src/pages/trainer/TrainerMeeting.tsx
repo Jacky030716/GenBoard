@@ -4,44 +4,29 @@ import {
 } from "@/features/trainer/components/MeetingScheduler";
 import { Header } from "@/features/trainer/components/Header";
 import { useCreateMeeting } from "@/features/trainer/hooks/use-create-meeting";
-import { format } from "date-fns";
 import { useGetTrainees } from "@/features/trainer/hooks/trainee/use-get-trainees";
 
-const exampleTrainees = [
-  { id: "1", name: "John Doe" },
-  { id: "2", name: "Jane Smith" },
-  { id: "3", name: "Robert Johnson" },
-  { id: "4", name: "Emily Williams" },
-];
-
 const TrainerMeeting = () => {
+  const department = localStorage.getItem("department") as string;
+
   const createMeeting = useCreateMeeting();
-  const traineesQuery = useGetTrainees();
+  const traineesQuery = useGetTrainees(department);
 
-  console.log("Trainees:", traineesQuery.data);
+  const trainees = traineesQuery.data?.map((trainee: any) => ({
+    id: trainee.uid,
+    name: trainee.name,
+  }));
 
-  const handleSubmit = async (data: MeetingFormValues) => {
-    createMeeting.mutate(
-      {
-        ...data,
-        date: new Date(data.date),
-        host: "1234567",
-      },
-      {
-        onSuccess: () => {
-          console.log("Meeting created successfully");
-        },
-        onError: (error) => {
-          console.error("Error creating meeting:", error);
-        },
-      }
-    );
-  };
+  const isLoading = traineesQuery.isLoading || createMeeting.isPending;
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <div className="flex-1 flex flex-col gap-12 w-full bg-background-light p-8">
+    <div className="flex-1 flex flex-col gap-12 w-full h-full bg-background-light p-8">
       <Header title="Arrange a meeeting" />
-      <MeetingScheduler onSubmit={handleSubmit} trainees={exampleTrainees} />
+      <MeetingScheduler trainees={trainees} />
     </div>
   );
 };

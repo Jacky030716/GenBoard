@@ -20,46 +20,58 @@ import { feedbackFormValues } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useCreateFeedback } from "./hooks/use-create-feedback";
 
 export const feedbackFormSchema = z.object({
-  name: z.string().nonempty("Name is required"),
-  email: z
-    .string()
-    .email("Invalid email address")
-    .nonempty("Email is required"),
+  uid: z.string().nonempty("User ID is required"),
   problemType: z.string().nonempty("Problem type is required"),
-  feedback: z.string().nonempty("Feedback is required"),
+  description: z.string().nonempty("Feedback is required"),
 });
 
 export const problemTypes = [
-  { id: "bug", name: "Bug Report" },
-  { id: "feature", name: "Feature Request" },
-  { id: "ui", name: "UI/UX Feedback" },
-  { id: "performance", name: "Performance Issue" },
-  { id: "usability", name: "Usability Issue" },
-  { id: "other", name: "Other" },
+  { id: "Bug Report", name: "Bug Report" },
+  { id: "Feature Request", name: "Feature Request" },
+  { id: "UI/UX Feedback", name: "UI/UX Feedback" },
+  { id: "System Problem", name: "System Problem" },
+  { id: "Evaluation Problem", name: "Evaluation Problem" },
+  { id: "Other", name: "Other" },
 ];
 
 interface FeedbackFormProps {
   email: string;
   name: string;
+  uid: string | undefined;
 }
 
-export const FeedbackForm = ({ email, name }: FeedbackFormProps) => {
+export const FeedbackForm = ({ email, name, uid }: FeedbackFormProps) => {
+  const createFeedback = useCreateFeedback();
+
   const form = useForm<feedbackFormValues>({
     resolver: zodResolver(feedbackFormSchema),
     defaultValues: {
-      email,
-      name,
+      uid,
       problemType: "",
-      feedback: "",
+      description: "",
     },
   });
 
   const onSubmit = async (data: feedbackFormValues) => {
-    console.log("Form submitted:", data);
-    // Handle form submission logic here
+    console.log("Form data:", data);
+
+    createFeedback.mutate(
+      {
+        ...data,
+        uid: uid || "",
+      },
+      {
+        onSuccess: () => {
+          form.reset();
+        },
+      }
+    );
   };
+
+  const isLoading = createFeedback.isPending;
 
   return (
     <div className="w-full max-w-7xl">
@@ -75,22 +87,11 @@ export const FeedbackForm = ({ email, name }: FeedbackFormProps) => {
                 <FormLabel className="font-medium w-1/5 font-poppins text-black-100">
                   Name
                 </FormLabel>
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem className="flex-1">
-                      <FormControl>
-                        <Input
-                          placeholder="Danial"
-                          className="w-full pl-3 text-left font-normal border-0 border-b border-gray-300 rounded-none bg-[#f0fafc] h-12"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <div className="flex-1">
+                  <div className="w-full pl-3 text-left font-normal border-0 border-b border-gray-300 rounded-none bg-[#f0fafc] h-12 flex items-center">
+                    {name}
+                  </div>
+                </div>
               </div>
 
               {/* Email input */}
@@ -98,20 +99,11 @@ export const FeedbackForm = ({ email, name }: FeedbackFormProps) => {
                 <FormLabel className="font-medium w-1/5 font-poppins text-black-100">
                   Email
                 </FormLabel>
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem className="flex-1">
-                      <Input
-                        placeholder="danial@gmail.com"
-                        className="w-full pl-3 text-left font-normal border-0 border-b border-gray-300 rounded-none bg-[#f0fafc] h-12"
-                        {...field}
-                      />
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <div className="flex-1">
+                  <div className="w-full pl-3 text-left font-normal border-0 border-b border-gray-300 rounded-none bg-[#f0fafc] h-12 flex items-center">
+                    {email}
+                  </div>
+                </div>
               </div>
 
               <div className="flex items-center justify-between">
@@ -154,7 +146,7 @@ export const FeedbackForm = ({ email, name }: FeedbackFormProps) => {
               </FormLabel>
               <FormField
                 control={form.control}
-                name="feedback"
+                name="description"
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
@@ -171,8 +163,12 @@ export const FeedbackForm = ({ email, name }: FeedbackFormProps) => {
             </div>
           </div>
 
-          <Button type="submit" className="rounded-full h-12 text-lg w-[300px]">
-            Submit Feedback
+          <Button
+            type="submit"
+            className="rounded-full h-12 text-lg w-[300px]"
+            disabled={isLoading}
+          >
+            {isLoading ? "Submitting..." : "Submit Feedback"}
           </Button>
         </form>
       </Form>

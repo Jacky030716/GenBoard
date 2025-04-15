@@ -3,12 +3,14 @@ import TrainerMainSection from "./TrainerMainSection";
 
 const TrainerDashboard = () => {
   return (
-    <div className="w-full flex-1 flex">
+    <div className="flex h-full">
       {/* Sidebar */}
-      <TrainerSidebar />
+      <div className="w-[300px] flex-shrink-0">
+        <TrainerSidebar />
+      </div>
 
       {/* Main Content */}
-      <main className="bg-[#FFF7F7] flex-1">
+      <main className="bg-[#FFF7F7] flex-1 overflow-y-auto min-h-screen">
         <TrainerMainSection />
       </main>
     </div>

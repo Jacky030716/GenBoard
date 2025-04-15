@@ -1,3 +1,11 @@
+import {
+  Module1,
+  Module2,
+  Module3,
+  OnboardingBackground1,
+  OnboardingBackground2,
+  OnboardingBackground3,
+} from "@/assets";
 import { OnboardingHeader } from "./OnboardingHeader";
 import { OnboardingPlan } from "./OnboardingPlan";
 import { OnboardingProgressBar } from "./OnboardingProgressBar";
@@ -18,6 +26,8 @@ export const OnboardingMainSection = () => {
         <OnboardingPlan
           month={1}
           title="Getting Started"
+          bg={OnboardingBackground1}
+          moduleImg={Module1}
           description="Learn about the company, set up your development tools, and understand Git basics."
           availableDate="4 May 2025"
           isCompleted={true}
@@ -29,6 +39,8 @@ export const OnboardingMainSection = () => {
           title="Learn & Practice"
           description="Get familiar with the project structure, learn React, and complete your first task."
           availableDate="5 June 2025"
+          bg={OnboardingBackground2}
+          moduleImg={Module2}
           isCompleted={false}
           buttonText="Resume Course"
           onButtonClick={() => handleCourseAction("2")}
@@ -38,6 +50,8 @@ export const OnboardingMainSection = () => {
           title="Contribute & Demo"
           description="Join the team workflow, finish a full task, and show your work."
           availableDate="5 July 2025"
+          bg={OnboardingBackground3}
+          moduleImg={Module3}
           isCompleted={false}
           buttonText="Resume Course"
           onButtonClick={() => handleCourseAction("3")}

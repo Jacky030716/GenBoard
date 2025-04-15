@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
-import { Search } from "lucide-react";
+import { useState } from "react";
 
 // Import required components if using shadcn UI
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Chart } from "../../features/trainer/components/Chart";
 import { MeetingCalendar } from "../../features/trainer/components/MeetingCalendar";
+import { useGetMeetings } from "@/features/trainer/hooks/use-get-meetings";
 
 // Mock data for calendar events
 const calendarEvents = [
@@ -48,6 +47,13 @@ const calendarEvents = [
 ];
 
 export default function TrainerMainSection() {
+  const uid = localStorage.getItem("uid") as string;
+
+  const meetingsQuery = useGetMeetings(uid);
+  const meetings = meetingsQuery.data;
+
+  console.log("Meetings:", meetings);
+
   const [searchEmail, setSearchEmail] = useState("");
 
   const currentDate = new Date();
@@ -60,7 +66,7 @@ export default function TrainerMainSection() {
   };
 
   return (
-    <div className="p-12">
+    <div className="mb-10 p-12">
       <h1 className="text-2xl font-bold mb-6 font-montserrat">My Dashboard</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -74,7 +80,7 @@ export default function TrainerMainSection() {
           </h2>
           <div className="bg-white rounded-lg overflow-hidden">
             <MeetingCalendar
-              events={calendarEvents}
+              events={meetings}
               year={currentYear}
               month={currentMonth}
             />

@@ -62,7 +62,7 @@ createRoot(document.getElementById("root")!).render(
           </Route>
         </Routes>
       </Router>
-      <Chatbot />
+      {/* <Chatbot /> */}
     </QueryClientProvider>
   </StrictMode>
 );

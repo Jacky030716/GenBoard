@@ -20,7 +20,7 @@ export const TrainerSidebar = () => {
   };
 
   return (
-    <nav className="w-[300px] flex flex-col items-center shadow-lg">
+    <nav className="w-full h-full z-10 flex flex-col items-center shadow-lg">
       <Profile />
       <Separator />
       <div className="flex-1 flex flex-col w-full p-8 gap-4 font-poppins">

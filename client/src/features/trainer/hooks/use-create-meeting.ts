@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 
 interface CreateMeetingPayload {
   title: string;
-  date: Date;
+  date: string;
   time: string;
   purpose: string;
   host: string;

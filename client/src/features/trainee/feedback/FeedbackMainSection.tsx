@@ -24,7 +24,11 @@ export const FeedbackMainSection = () => {
 
       {/* Feedback Form */}
       <div className="w-full">
-        <FeedbackForm email={email as string} name={user.name} />
+        <FeedbackForm
+          email={email as string}
+          name={user.name}
+          uid={uid as string}
+        />
       </div>
     </div>
   );

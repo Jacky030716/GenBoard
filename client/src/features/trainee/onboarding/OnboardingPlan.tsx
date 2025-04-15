@@ -1,4 +1,3 @@
-import { OnboardingBackground, ReactLogo } from "@/assets";
 import { Button } from "@/components/ui/button";
 
 interface OnboardingPlanProps {
@@ -10,6 +9,8 @@ interface OnboardingPlanProps {
   onButtonClick?: () => void;
   buttonText?: string;
   isCompleted?: boolean;
+  bg?: string;
+  moduleImg?: string;
 }
 
 export const OnboardingPlan = ({
@@ -21,6 +22,8 @@ export const OnboardingPlan = ({
   onButtonClick,
   buttonText,
   isCompleted,
+  bg,
+  moduleImg,
 }: OnboardingPlanProps) => {
   return (
     <div className="w-full overflow-hidden onboarding-shadow bg-[#2C2F48] text-white rounded-2xl flex flex-col justify-between">
@@ -28,17 +31,21 @@ export const OnboardingPlan = ({
       <div className="flex-1 relative pb-12 bg-opacity-80 rounded-2xl">
         <div className="w-full overflow-hidden">
           <img
-            src={OnboardingBackground}
+            src={bg}
             alt="React Logo"
-            className="w-full scale-[1.8] object-left rounded-2xl h-1/3 object-cover z-[-1]"
+            className="w-full scale-[1.8] object-left rounded-2xl h-[250px] object-cover z-[-1]"
           />
         </div>
 
         {/* Month and Title */}
         <div className="-mt-10 rounded-t-2xl bg-[#393D5E] p-6 font-montserrat drop-shadow-xl shadow-[#00000080] flex flex-col gap-1 h-[181px] relative">
-          {/* React Logo */}
-          <div className="absolute -top-8 right-8 transform  z-10">
-            <img src={ReactLogo} alt="React Logo" className="size-32" />
+          {/* Module Logo */}
+          <div className="absolute -top-8 right-8 transform  z-10 rounded-full overflow-hidden">
+            <img
+              src={moduleImg}
+              alt="React Logo"
+              className="size-24 scale-125"
+            />
           </div>
 
           <h3 className="text-3xl font-bold">Month {month}</h3>
