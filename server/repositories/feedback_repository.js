@@ -1,5 +1,4 @@
 const Feedback = require("../models/feedback_model");
-const { getAll } = require("./onboarding_repository");
 
 const feedbackRepository = {
     createFeedback: async (feedback) => {
