@@ -1,23 +1,56 @@
+import { useGetOnboardingStatus } from "@/features/trainee/onboarding/hooks/useGetOnboardingStatus";
+import { useGetEvaluation } from "./hooks/use-get-evaluation";
 import { SummaryReport } from "./SummaryReport";
 import { TraineeInternshipStatus } from "./TraineeInternshipStatus";
 
-export const TraineeReport = () => {
+export interface Trainee {
+  name: string;
+  startDate: string;
+  completionDate: string;
+  status: string;
+  totalMark: string;
+}
+
+interface TraineeReportProps {
+  trainee: Trainee;
+  summary: {
+    strength: string[] | string;
+    weakness: string[] | string;
+  };
+  isLoading: boolean;
+}
+
+export const TraineeReport = ({
+  trainee,
+  isLoading,
+  summary,
+}: TraineeReportProps) => {
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <p className="text-lg font-semibold">Loading...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full flex flex-col gap-8 items-start justify-start">
       {/* Trainee current status */}
-      <TraineeInternshipStatus />
+      <TraineeInternshipStatus
+        trainee={{
+          name: trainee.name,
+          startDate: trainee.startDate,
+          completionDate: trainee.completionDate,
+          status: trainee.status,
+          totalMark: trainee.totalMark,
+        }}
+      />
 
       {/* Summary by AI */}
       <SummaryReport
         profileImage="/api/placeholder/80/80"
-        strengths={[
-          "Excellent quiz accuracy (avg. score: 92%)",
-          "Consistent weekly task submissions",
-        ]}
-        weaknesses={[
-          "Progress occasionally slowed during Week 3 and 5",
-          "Limited feedback provided during peer reviews",
-        ]}
+        strengths={summary.strength || []}
+        weaknesses={summary.weakness || []}
         disclaimerDate="1/1/2026"
       />
     </div>

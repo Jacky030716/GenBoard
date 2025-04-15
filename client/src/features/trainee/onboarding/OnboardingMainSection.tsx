@@ -9,11 +9,13 @@ import {
 import { OnboardingHeader } from "./OnboardingHeader";
 import { OnboardingPlan } from "./OnboardingPlan";
 import { OnboardingProgressBar } from "./OnboardingProgressBar";
+import { useNavigate } from "react-router";
 
 export const OnboardingMainSection = () => {
-  const handleCourseAction = (month: string) => {
-    console.log(`Action clicked for Month ${month}`);
-    // Handle navigation or other actions
+  const navigate = useNavigate();
+
+  const handleCourseAction = (moduleId: string) => {
+    navigate(`/trainee/onboarding/plan/${moduleId}`);
   };
 
   return (
@@ -32,7 +34,7 @@ export const OnboardingMainSection = () => {
           availableDate="4 May 2025"
           isCompleted={true}
           buttonText="Completed"
-          onButtonClick={() => handleCourseAction("1")}
+          onButtonClick={() => handleCourseAction("module1")}
         />
         <OnboardingPlan
           month={2}
@@ -43,7 +45,7 @@ export const OnboardingMainSection = () => {
           moduleImg={Module2}
           isCompleted={false}
           buttonText="Resume Course"
-          onButtonClick={() => handleCourseAction("2")}
+          onButtonClick={() => handleCourseAction("module2")}
         />
         <OnboardingPlan
           month={3}
@@ -54,7 +56,7 @@ export const OnboardingMainSection = () => {
           moduleImg={Module3}
           isCompleted={false}
           buttonText="Resume Course"
-          onButtonClick={() => handleCourseAction("3")}
+          onButtonClick={() => handleCourseAction("module3")}
         />
       </div>
     </div>

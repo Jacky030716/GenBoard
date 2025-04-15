@@ -4,5 +4,8 @@ const onboardingController = require("../controllers/onboarding_controller");
 
 module.exports = router;
 
-router.get("/summarize/:department", onboardingController.getDepartmentOnboarding);
+router.get(
+  "/summarize/:department",
+  onboardingController.getDepartmentOnboarding
+);
 router.get("/:uid", onboardingController.getOnboarding);

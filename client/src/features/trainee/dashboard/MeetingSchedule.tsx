@@ -8,7 +8,7 @@ export const MeetingSchedule = () => {
           <h2 className="text-xl text-center font-semibold mb-4">
             Meeting Schedule
           </h2>
-          <div className="w-full bg-white rounded-xl p-4 text-gray-800">
+          <div className="w-full flex justify-center bg-white rounded-xl p-4 text-gray-800">
             <Calendar />
           </div>
         </div>

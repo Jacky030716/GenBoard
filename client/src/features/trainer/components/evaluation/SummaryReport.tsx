@@ -2,25 +2,19 @@ import { Avatar } from "@/assets";
 
 interface SummaryReportProps {
   profileImage?: string;
-  strengths: string[];
-  weaknesses: string[];
+  strengths: string[] | string;
+  weaknesses: string[] | string;
   disclaimerDate?: string;
 }
 
 export const SummaryReport: React.FC<SummaryReportProps> = ({
-  profileImage = "/api/placeholder/80/80",
-  strengths = [
-    "Excellent quiz accuracy (avg. score: 92%)",
-    "Consistent weekly task submissions",
-  ],
-  weaknesses = [
-    "Progress occasionally slowed during Week 3 and 5",
-    "Limited feedback provided during peer reviews",
-  ],
-  disclaimerDate = "1/1/2026",
+  profileImage,
+  strengths,
+  weaknesses,
+  disclaimerDate,
 }) => {
   return (
-    <div className="w-full bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+    <div className="w-full bg-white rounded-2xl shadow-sm p-6 border border-gray-100 font-montserrat">
       <div className="flex flex-col md:flex-row gap-6">
         {/* Main content section */}
         <div className="flex flex-grow gap-5">
@@ -45,10 +39,15 @@ export const SummaryReport: React.FC<SummaryReportProps> = ({
                 <div className="w-3 h-3 bg-blue-500 rotate-45"></div>
                 <h3 className="font-bold text-lg">Strengths:</h3>
               </div>
+              {/* If strengths is an array */}
               <ul className="list-disc ml-6 space-y-1">
-                {strengths.map((strength, index) => (
-                  <li key={`strength-${index}`}>{strength}</li>
-                ))}
+                {Array.isArray(strengths) ? (
+                  strengths.map((strength, index) => (
+                    <li key={`strength-${index}`}>{strength}</li>
+                  ))
+                ) : (
+                  <li>{strengths}</li>
+                )}
               </ul>
             </div>
 
@@ -58,10 +57,15 @@ export const SummaryReport: React.FC<SummaryReportProps> = ({
                 <div className="w-3 h-3 bg-amber-400 rotate-45"></div>
                 <h3 className="font-bold text-lg">Weaknesses:</h3>
               </div>
+              {/* If weaknesses is an array */}
               <ul className="list-disc ml-6 space-y-1">
-                {weaknesses.map((weakness, index) => (
-                  <li key={`weakness-${index}`}>{weakness}</li>
-                ))}
+                {Array.isArray(weaknesses) ? (
+                  weaknesses.map((weakness, index) => (
+                    <li key={`weakness-${index}`}>{weakness}</li>
+                  ))
+                ) : (
+                  <li>{weaknesses}</li>
+                )}
               </ul>
             </div>
           </div>

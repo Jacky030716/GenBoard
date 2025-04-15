@@ -1,58 +1,16 @@
 import { useState } from "react";
 
-// Import required components if using shadcn UI
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Chart } from "../../features/trainer/components/Chart";
 import { MeetingCalendar } from "../../features/trainer/components/MeetingCalendar";
 import { useGetMeetings } from "@/features/trainer/hooks/use-get-meetings";
 
-// Mock data for calendar events
-const calendarEvents = [
-  {
-    id: 1,
-    title: "Introduction to AI for Busy People",
-    date: new Date(2025, 3, 1), // April 1st
-    color: "#9AF9BC",
-    time: "10:00 AM",
-  },
-  {
-    id: 2,
-    title: "How to Start Coding as a Beginner",
-    date: new Date(2025, 3, 4), // April 4th
-    color: "#F9B2B2",
-    time: "2:00 PM",
-  },
-  {
-    id: 3,
-    title: "Breakthrough Research on Natural Language Processing",
-    date: new Date(2025, 3, 8), // April 8th
-    color: "#F9E9B2",
-    time: "11:00 AM",
-  },
-  {
-    id: 4,
-    title: "How to Stay Productive in Work from Home",
-    date: new Date(2025, 3, 15), // April 15th
-    color: "#B2F9E9",
-    time: "3:00 PM",
-  },
-  {
-    id: 5,
-    title: "The Future of AI in Making Every Day Life Better",
-    date: new Date(2025, 3, 18), // April 18th
-    color: "#E9B2F9",
-    time: "1:00 PM",
-  },
-];
-
 export default function TrainerMainSection() {
   const uid = localStorage.getItem("uid") as string;
 
   const meetingsQuery = useGetMeetings(uid);
   const meetings = meetingsQuery.data;
-
-  console.log("Meetings:", meetings);
 
   const [searchEmail, setSearchEmail] = useState("");
 
@@ -64,6 +22,16 @@ export default function TrainerMainSection() {
     console.log("Searching for:", searchEmail);
     // Implement actual search functionality here
   };
+
+  const isLoading = meetingsQuery.isLoading;
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <p className="text-lg font-semibold">Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="mb-10 p-12">

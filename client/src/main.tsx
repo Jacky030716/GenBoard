@@ -22,6 +22,7 @@ import TraineeSchedule from "./pages/trainee/TraineeSchedule.tsx";
 import { Toaster } from "sonner";
 import { Chatbot } from "./features/chatbot/chatbot.tsx";
 import TraineeGrade from "./pages/trainee/TraineeGrade.tsx";
+import TraineeOnboardingModule from "./pages/trainee/TraineeOnboardingModule.tsx";
 
 export const queryClient = new QueryClient();
 
@@ -46,6 +47,10 @@ createRoot(document.getElementById("root")!).render(
             <Route path="dashboard" element={<TraineeDashboard />} />
             <Route path="onboarding" element={<TraineeOnboarding />} />
             <Route path="onboarding/grade" element={<TraineeGrade />} />
+            <Route
+              path="onboarding/plan/:moduleId"
+              element={<TraineeOnboardingModule />}
+            />
             <Route path="schedule" element={<TraineeSchedule />} />
             <Route path="feedback" element={<TraineeFeedback />} />
           </Route>

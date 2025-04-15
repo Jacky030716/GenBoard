@@ -21,6 +21,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useCreateFeedback } from "./hooks/use-create-feedback";
+import { useNavigate } from "react-router";
+import { toast } from "sonner";
 
 export const feedbackFormSchema = z.object({
   uid: z.string().nonempty("User ID is required"),
@@ -44,6 +46,7 @@ interface FeedbackFormProps {
 }
 
 export const FeedbackForm = ({ email, name, uid }: FeedbackFormProps) => {
+  const navigate = useNavigate();
   const createFeedback = useCreateFeedback();
 
   const form = useForm<feedbackFormValues>({
@@ -56,8 +59,6 @@ export const FeedbackForm = ({ email, name, uid }: FeedbackFormProps) => {
   });
 
   const onSubmit = async (data: feedbackFormValues) => {
-    console.log("Form data:", data);
-
     createFeedback.mutate(
       {
         ...data,
@@ -66,6 +67,8 @@ export const FeedbackForm = ({ email, name, uid }: FeedbackFormProps) => {
       {
         onSuccess: () => {
           form.reset();
+          toast.success("Feedback submitted successfully!");
+          navigate("/trainee/dashboard");
         },
       }
     );
@@ -74,7 +77,7 @@ export const FeedbackForm = ({ email, name, uid }: FeedbackFormProps) => {
   const isLoading = createFeedback.isPending;
 
   return (
-    <div className="w-full max-w-7xl">
+    <div className="w-full">
       <Form {...form}>
         <form
           className="w-full flex flex-col items-center gap-24"

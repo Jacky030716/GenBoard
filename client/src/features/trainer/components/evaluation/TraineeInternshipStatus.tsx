@@ -1,7 +1,21 @@
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
 
-export const TraineeInternshipStatus = () => {
+interface TraineeInternshipStatusProps {
+  trainee: {
+    name: string;
+    startDate: string;
+    completionDate: string;
+    status: string;
+    totalMark: string;
+  };
+}
+
+export const TraineeInternshipStatus = ({
+  trainee,
+}: TraineeInternshipStatusProps) => {
+  const { name, startDate, completionDate, status, totalMark } = trainee;
+
   const formatDate = (date: string) => {
     return format(new Date(date), "dd MMM yyyy");
   };
@@ -19,15 +33,15 @@ export const TraineeInternshipStatus = () => {
       </thead>
       <tbody className="text-center font-semibold">
         <tr className=" text-black border-b">
-          <td className="p-4">John Doe</td>
-          <td>{formatDate("2025-01-01")}</td>
-          <td>{formatDate("2025-06-01")}</td>
+          <td className="p-4">{name}</td>
+          <td>{formatDate(startDate)}</td>
+          <td>{formatDate(completionDate)}</td>
           <td>
             <Badge variant="progress">
-              <span>In Progress</span>
+              <span className="capitalize">{status}</span>
             </Badge>
           </td>
-          <td>85%</td>
+          <td>{totalMark}%</td>
         </tr>
       </tbody>
     </table>

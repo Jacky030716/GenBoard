@@ -1,13 +1,21 @@
-import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from "recharts";
+import {
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
+import { useGetDepartmentSummary } from "../hooks/trainee/use-get-department-summary";
 
 // Mock data for the pie chart
-const traineesData = [
-  { name: "Passed", value: 35, color: "#5BF16F" },
-  { name: "Failed", value: 8, color: "#FF5757" },
-  { name: "In Progress", value: 15, color: "#F1E05B" },
-];
+// const traineesData = [
+//   { name: "Passed", value: 35, color: "#5BF16F" },
+//   { name: "Failed", value: 8, color: "#FF5757" },
+//   { name: "In Progress", value: 15, color: "#F1E05B" },
+// ];
 
-const totalTrainees = traineesData.reduce((acc, item) => acc + item.value, 0);
+// const totalTrainees = traineesData.reduce((acc, item) => acc + item.value, 0);
 
 const renderCustomLegend = (props: any) => {
   const { payload } = props;
@@ -31,14 +39,32 @@ const renderCustomLegend = (props: any) => {
 };
 
 export const Chart = () => {
+  const department = localStorage.getItem("department") as string;
+
+  const summaryQuery = useGetDepartmentSummary(department);
+  const summary = summaryQuery.data;
+
+  const totalTrainees = summary?.reduce(
+    (acc: number, item: { value: number }) => acc + item.value,
+    0
+  );
+
+  if (summaryQuery.isLoading) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <p className="text-lg font-semibold">Loading...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white rounded-lg p-6 shadow-sm flex justify-center items-center relative">
       <div className="flex items-center justify-between mb-4">
-        <div className="h-[500px] w-[600px]">
+        <div className="h-[500px] w-[500px]">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
-                data={traineesData}
+                data={summary}
                 cx="50%"
                 cy="50%"
                 innerRadius={0}
@@ -47,11 +73,19 @@ export const Chart = () => {
                 dataKey="value"
                 labelLine={false}
               >
-                {traineesData.map((entry, index) => (
+                {summary.map((entry: any, index: any) => (
                   <Cell key={`cell-${index}`} fill={entry.color} />
                 ))}
               </Pie>
               <Legend content={renderCustomLegend} />
+              <Tooltip
+                formatter={(value, name) => [value, name]}
+                contentStyle={{
+                  backgroundColor: "#fff",
+                  borderRadius: "8px",
+                  padding: "10px",
+                }}
+              />
             </PieChart>
           </ResponsiveContainer>
         </div>
