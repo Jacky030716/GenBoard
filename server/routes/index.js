@@ -16,6 +16,8 @@ const traineeProgressRoute = require("./trainee_progress_route")
 const aiEvaluationReportRoute = require("./ai_evaluation_report_route")
 const aiSummarizeReportRoute = require("./ai_summarize_report_route")
 
+const monthRoute = require("./month_route")
+
 const codeQuestionRoute = require("./code_question_route")
 const quizRoute = require("./quiz_route");
 const guideRoute = require("./guide_route");
@@ -33,6 +35,8 @@ router.use("/traineeProgress", traineeProgressRoute)
 
 router.use("/aiEvaluationReport", aiEvaluationReportRoute)
 router.use("/aiSummarizeReport", aiSummarizeReportRoute)
+
+router.use("/month", monthRoute)
 
 router.use('/codeQuestion', codeQuestionRoute)
 router.use('/quiz', quizRoute)
