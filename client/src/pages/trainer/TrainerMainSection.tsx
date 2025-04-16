@@ -34,7 +34,7 @@ export default function TrainerMainSection() {
   }
 
   return (
-    <div className="mb-10 p-12">
+    <div className="p-12">
       <h1 className="text-2xl font-bold mb-6 font-montserrat">My Dashboard</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">

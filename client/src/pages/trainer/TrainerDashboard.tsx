@@ -10,7 +10,7 @@ const TrainerDashboard = () => {
       </div>
 
       {/* Main Content */}
-      <main className="bg-[#FFF7F7] flex-1 overflow-y-auto min-h-screen">
+      <main className="bg-[#FFF7F7] flex-1 overflow-y-auto">
         <TrainerMainSection />
       </main>
     </div>

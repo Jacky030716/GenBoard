@@ -6,7 +6,7 @@ import { ToDoList } from "./ToDoList";
 
 export const DashboardMainSection = () => {
   return (
-    <div className="p-12 flex flex-col gap-8 mb-10">
+    <div className="p-12 flex flex-col gap-8">
       <DashboardHeader />
 
       {/* Grid */}

@@ -48,7 +48,7 @@ createRoot(document.getElementById("root")!).render(
             <Route path="onboarding" element={<TraineeOnboarding />} />
             <Route path="onboarding/grade" element={<TraineeGrade />} />
             <Route
-              path="onboarding/plan/:moduleId"
+              path="onboarding/plan/:taskId"
               element={<TraineeOnboardingModule />}
             />
             <Route path="schedule" element={<TraineeSchedule />} />
@@ -68,6 +68,7 @@ createRoot(document.getElementById("root")!).render(
         </Routes>
       </Router>
       {/* <Chatbot /> */}
+      {/* <BotpressChat /> */}
     </QueryClientProvider>
   </StrictMode>
 );
