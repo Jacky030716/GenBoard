@@ -24,6 +24,8 @@ import { Chatbot } from "./features/chatbot/chatbot.tsx";
 import TraineeGrade from "./pages/trainee/TraineeGrade.tsx";
 import TraineeOnboardingModule from "./pages/trainee/TraineeOnboardingModule.tsx";
 
+import Test from "./ni_testing/Test.tsx";
+
 export const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
@@ -35,6 +37,7 @@ createRoot(document.getElementById("root")!).render(
           {/* <Route index element={<App />} /> */}
 
           <Route element={<AuthLayout />}>
+            <Route path="/test" element={<Test />} />
             <Route path="/" element={<SignIn />} />
             <Route path="sign-up" element={<SignUp />} />
             <Route path="forgot-password" element={<ForgotPasswordPage />} />
