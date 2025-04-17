@@ -12,6 +12,7 @@ const feedbackRoute = require("./feedback_route");
 const meetingRoute = require("./meeting_route");
 
 const traineeProgressRoute = require("./trainee_progress_route")
+const resultRoute = require("./result_route")
 
 const aiEvaluationReportRoute = require("./ai_evaluation_report_route")
 const aiSummarizeReportRoute = require("./ai_summarize_report_route")
@@ -32,6 +33,7 @@ router.use('/feedback', feedbackRoute)
 router.use('/meeting', meetingRoute)
 
 router.use("/traineeProgress", traineeProgressRoute)
+router.use("/result", resultRoute)
 
 router.use("/aiEvaluationReport", aiEvaluationReportRoute)
 router.use("/aiSummarizeReport", aiSummarizeReportRoute)
