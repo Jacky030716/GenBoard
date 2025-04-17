@@ -74,10 +74,6 @@ export default function TraineeSignUpForm() {
   const onSubmit = (values: TrainerFormValues) => {
     setIsSubmitting(true);
     try {
-      // Here you would typically make an API call to create the account
-      // await createAccount(values);
-
-      // Navigate to dashboard or confirmation page
       navigate(`/trainer/dashboard`);
     } catch (error) {
       console.error("Signup failed:", error);

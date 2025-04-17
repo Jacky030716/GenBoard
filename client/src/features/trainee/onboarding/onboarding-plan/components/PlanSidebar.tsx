@@ -1,27 +1,42 @@
-import { cn } from "@/lib/utils";
-import { NavLink, useLocation, useNavigate } from "react-router";
-import {
-  LayoutGrid,
-  LogOut,
-  MessageSquare,
-  Package,
-  Users,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { SidebarHeader } from "./SidebarHeader";
 import { OnboardingTask } from "./OnboardingTask";
+import { useParams } from "react-router";
 
-const tempTasks = [
-  { id: "task-1", title: "1.1 Introduction to the Program", tasks: ["1"] },
-  { id: "task-2", title: "1.2 Setting Up Your Profile" },
-  { id: "task-3", title: "1.3 Understanding the Dashboard" },
-  { id: "task-4", title: "1.4 Completing Your First Task" },
-  { id: "task-5", title: "1.5 Feedback and Support" },
-];
+interface Task {
+  id: string;
+  index: string;
+  title: string;
+  tasks?: {
+    index: string;
+    title: string;
+  }[];
+}
 
-export const PlanSidebar = () => {
-  const pathname = useLocation().pathname;
-  const navigate = useNavigate();
+interface PlanSidebarProps {
+  tasks: Task[];
+  currentPlan: string;
+}
+
+export const PlanSidebar = ({ tasks, currentPlan }: PlanSidebarProps) => {
+  const { taskId } = useParams<{ taskId: string }>();
+
+  const isActive = (task: Task) => {
+    if (!task || !taskId) return false;
+
+    // Check if the current task matches directly
+    if (`${task.index}_${task.title}` === taskId) {
+      return true;
+    }
+
+    // Check if any subtask matches
+    if (task.tasks?.length) {
+      return task.tasks.some((subTask) => {
+        return `${subTask.index}_${subTask.title}` === taskId;
+      });
+    }
+
+    return false;
+  };
 
   return (
     <nav className="w-full h-full flex flex-col gap-8 items-center shadow-lg bg-white z-10 p-6">
@@ -31,14 +46,18 @@ export const PlanSidebar = () => {
           Week 1 - Week 4
         </div>
 
-        {/* List of tasks to be completed */}
         <div className="flex-1 flex flex-col gap-4">
-          {tempTasks.map((task) => (
+          {tasks.map((task) => (
             <OnboardingTask
               key={task.id}
               id={task.id}
-              title={task.title}
-              hasSubtasks={task.tasks && task.tasks.length > 0}
+              currentPath={taskId}
+              path={`${task.index}_${task.title}`}
+              title={`${task.index} - ${task.title}`}
+              hasSubtasks={!!task.tasks?.length}
+              subTasks={task.tasks || []}
+              currentPlan={currentPlan}
+              isActive={isActive(task)}
             />
           ))}
         </div>

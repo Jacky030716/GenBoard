@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { MeetingList } from "./MeetingList";
 import { useGetMeetings } from "./hooks/use-get-meetings";
 import { MeetingCalendar } from "./MeetingCalendar";
+import { NavLink } from "react-router";
 
 export const ScheduleMainSection = () => {
   const uid = localStorage.getItem("uid") as string;
@@ -27,15 +28,18 @@ export const ScheduleMainSection = () => {
         <Button
           size="lg"
           className="bg-[#596D94] hover:bg-[#596D94]/90 text-white rounded-full font-montserrat h-12"
+          asChild
         >
-          View All Meetings
+          <NavLink to="/trainee/meeting-summary">
+            View All Past Meetings Summary
+          </NavLink>
         </Button>
       </div>
 
       {/* Meeting lists */}
       <div className="w-full space-y-5">
         <MeetingCalendar meetingData={meetings} />
-        <MeetingList />
+        <MeetingList meetings={meetings} />
       </div>
     </div>
   );

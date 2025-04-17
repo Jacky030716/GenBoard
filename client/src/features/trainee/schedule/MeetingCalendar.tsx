@@ -12,6 +12,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 
 interface MeetingDataProps {
   meetingData: {
@@ -23,41 +24,13 @@ interface MeetingDataProps {
     title: string;
     _id: string;
   }[];
+  showCard?: boolean;
 }
 
-// Sample meeting event data
-const meetingData = [
-  {
-    date: "2025-04-05",
-    host: "b3ccdce6-2551-4589-bf9b-9071e3964fc5",
-    participants: "5afec499-d21f-4194-a732-4d1a4c733d35",
-    purpose: "Initial project briefing and task delegation.",
-    time: "10:00 AM",
-    title: "Project Kickoff",
-    _id: "67fd190e749bcb5d54f55715",
-  },
-  // Add more meetings as needed
-  {
-    date: "2025-04-15",
-    host: "b3ccdce6-2551-4589-bf9b-9071e3964fc5",
-    participants: "5afec499-d21f-4194-a732-4d1a4c733d35",
-    purpose: "Progress review and roadblock discussion.",
-    time: "2:00 PM",
-    title: "Weekly Check-in",
-    _id: "67fd190e749bcb5d54f55716",
-  },
-  {
-    date: "2025-04-25",
-    host: "b3ccdce6-2551-4589-bf9b-9071e3964fc5",
-    participants: "5afec499-d21f-4194-a732-4d1a4c733d35",
-    purpose: "Final review before delivery.",
-    time: "11:30 AM",
-    title: "Pre-delivery Review",
-    _id: "67fd190e749bcb5d54f55717",
-  },
-];
-
-export const MeetingCalendar = ({ meetingData }: MeetingDataProps) => {
+export const MeetingCalendar = ({
+  meetingData,
+  showCard = true,
+}: MeetingDataProps) => {
   const [date, setDate] = useState<Date>(new Date());
   const [selectedDay, setSelectedDay] = useState<Date | undefined>(undefined);
   const [selectedMeetings, setSelectedMeetings] = useState<any[]>([]);
@@ -72,7 +45,7 @@ export const MeetingCalendar = ({ meetingData }: MeetingDataProps) => {
   };
 
   return (
-    <div className="w-full flex gap-4">
+    <div className={cn("w-full flex gap-4", !showCard && "justify-center")}>
       <div className="w-fit rounded-lg border shadow bg-white py-4 px-8">
         <Calendar
           mode="single"
@@ -114,7 +87,7 @@ export const MeetingCalendar = ({ meetingData }: MeetingDataProps) => {
         />
       </div>
 
-      {selectedDay && (
+      {showCard && selectedDay && (
         <Card className="w-full">
           <CardHeader>
             <CardTitle>

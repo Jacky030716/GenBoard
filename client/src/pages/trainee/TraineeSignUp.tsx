@@ -3,7 +3,7 @@ import TraineeSignUpForm from "@/features/auth/components/TraineeSignUpForm";
 
 const TraineeSignUp = () => {
   return (
-    <div className="w-full flex-1 p-16 bg-[#FFF7F7]">
+    <div className="w-full flex-1 p-12 bg-[#FFF7F7]">
       <div className="max-w-8xl mx-auto flex items-center justify-center gap-12 overflow-hidden">
         <div className="flex-1 flex flex-col gap-6 items-center justify-center">
           <h1 className="font-bold text-3xl">Create Your Account</h1>

@@ -34,7 +34,7 @@ export const OnboardingMainSection = () => {
           availableDate="4 May 2025"
           isCompleted={true}
           buttonText="Completed"
-          onButtonClick={() => handleCourseAction("module1")}
+          onButtonClick={() => handleCourseAction("month1")}
         />
         <OnboardingPlan
           month={2}
@@ -45,7 +45,7 @@ export const OnboardingMainSection = () => {
           moduleImg={Module2}
           isCompleted={false}
           buttonText="Resume Course"
-          onButtonClick={() => handleCourseAction("module2")}
+          onButtonClick={() => handleCourseAction("month2")}
         />
         <OnboardingPlan
           month={3}
@@ -56,7 +56,7 @@ export const OnboardingMainSection = () => {
           moduleImg={Module3}
           isCompleted={false}
           buttonText="Resume Course"
-          onButtonClick={() => handleCourseAction("module3")}
+          onButtonClick={() => handleCourseAction("month3")}
         />
       </div>
     </div>

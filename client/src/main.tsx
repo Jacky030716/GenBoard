@@ -1,5 +1,6 @@
 import "./index.css";
 import { StrictMode } from "react";
+import { pdfjs } from "react-pdf";
 import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, BrowserRouter as Router, Routes } from "react-router";
@@ -23,8 +24,12 @@ import { Toaster } from "sonner";
 import { Chatbot } from "./features/chatbot/chatbot.tsx";
 import TraineeGrade from "./pages/trainee/TraineeGrade.tsx";
 import TraineeOnboardingModule from "./pages/trainee/TraineeOnboardingModule.tsx";
+import TraineeMeetingSummary from "./pages/trainee/TraineeMeetingSummary.tsx";
+import TraineeMeetingSummaryDetail from "./pages/trainee/TraineeMeetingSummaryDetail.tsx";
 
 export const queryClient = new QueryClient();
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -48,10 +53,20 @@ createRoot(document.getElementById("root")!).render(
             <Route path="onboarding" element={<TraineeOnboarding />} />
             <Route path="onboarding/grade" element={<TraineeGrade />} />
             <Route
-              path="onboarding/plan/:taskId"
+              path="onboarding/plan/:month"
+              element={<TraineeOnboardingModule />}
+            />
+            <Route
+              path="onboarding/plan/:month/:taskId"
               element={<TraineeOnboardingModule />}
             />
             <Route path="schedule" element={<TraineeSchedule />} />
+            <Route path="meeting-summary" element={<TraineeMeetingSummary />} />
+            <Route
+              path="meeting-summary/:meetingId"
+              element={<TraineeMeetingSummaryDetail />}
+            />
+
             <Route path="feedback" element={<TraineeFeedback />} />
           </Route>
 
