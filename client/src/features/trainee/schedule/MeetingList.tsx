@@ -1,6 +1,19 @@
 import { format } from "date-fns";
 
-export const MeetingList = () => {
+interface MeetingDataProps {
+  meetings: {
+    date: string;
+    host: string;
+    participants: string;
+    purpose: string;
+    time: string;
+    title: string;
+    _id: string;
+  }[];
+  showCard?: boolean;
+}
+
+export const MeetingList = ({ meetings }: MeetingDataProps) => {
   const formatDate = (date: string) => {
     return format(new Date(date), "dd MMM yyyy");
   };
@@ -18,21 +31,14 @@ export const MeetingList = () => {
         </tr>
       </thead>
       <tbody className="text-left font-medium ">
-        <tr className=" text-black border-b">
-          <td className="p-4">
-            System demo walkthrough and feedback collection
-          </td>
-          <td className="p-4">{formatDate("2025-04-28")}</td>
-          <td className="p-4">Mina</td>
-          <td className="p-4">10AM - 1PM</td>
-        </tr>
-
-        <tr className=" text-black border-b">
-          <td className="p-4">Performance Analytics Review</td>
-          <td className="p-4">{formatDate("2025-04-25")}</td>
-          <td className="p-4">Ginni Tan</td>
-          <td className="p-4">11.30AM - 12.30PM</td>
-        </tr>
+        {meetings.map((meeting) => (
+          <tr key={meeting._id} className=" text-black border-b">
+            <td className="p-4">{meeting.purpose}</td>
+            <td className="p-4">{formatDate(meeting.date)}</td>
+            <td className="p-4">{meeting.host}</td>
+            <td className="p-4">{meeting.time}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );

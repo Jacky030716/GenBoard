@@ -66,7 +66,7 @@ export const OnboardingPlan = ({
           {isCompleted ? "Completed" : "Resume Course"}
         </Button>
 
-        <div className="mt-4 text-center font-semibold text-black-100">
+        <div className="mt-4 text-center font-semibold text-black-100 font-poppins">
           Available from: {availableDate}
         </div>
       </div>

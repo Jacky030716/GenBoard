@@ -4,8 +4,9 @@ import { FeedbackForm } from "./FeedbackForm";
 export const FeedbackMainSection = () => {
   const uid = localStorage.getItem("uid");
   const email = localStorage.getItem("email");
+  const role = localStorage.getItem("role");
 
-  const userQuery = useGetUser(uid as string);
+  const userQuery = useGetUser(uid as string, role as string);
   const user = userQuery.data;
 
   if (userQuery.isLoading) {

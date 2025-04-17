@@ -6,7 +6,7 @@ export const useGetMeetings = (uid: string) => {
     enabled: !!uid,
     queryKey: ["meetings"],
     queryFn: async () => {
-      const response = await httpClient.get(`/meetings/participant/${uid}`);
+      const response = await httpClient.get(`/meeting/participant/${uid}`);
 
       if (response.status !== 200) {
         throw new Error("Error fetching meetings");

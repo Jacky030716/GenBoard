@@ -22,21 +22,20 @@ export default {
         card: "30px",
       },
       colors: {
-        background: "hsl(var(--background))",
+        background: {
+          DEFAULT: "#200706",
+          light: "#FFF7F7",
+        },
         foreground: "hsl(var(--foreground))",
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
         black: {
-          DEFAULT: "#000000",
           100: "#9A9A9A",
           600: "#2A2D3799",
           700: "#252526",
-        },
-        background: {
-          DEFAULT: "#200706",
-          light: "#FFF7F7",
+          DEFAULT: "#000000",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
@@ -74,7 +73,29 @@ export default {
           5: "hsl(var(--chart-5))",
         },
       },
+      keyframes: {
+        "accordion-down": {
+          from: {
+            height: "0",
+          },
+          to: {
+            height: "var(--radix-accordion-content-height)",
+          },
+        },
+        "accordion-up": {
+          from: {
+            height: "var(--radix-accordion-content-height)",
+          },
+          to: {
+            height: "0",
+          },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 };
