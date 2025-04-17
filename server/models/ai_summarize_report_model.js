@@ -1,5 +1,13 @@
 const mongoose = require("mongoose");
 
+const summarySectionSchema = new mongoose.Schema({
+  title: { type: String },
+  keyPoint: { type: String },
+  decision: { type: String },
+  actionItem: { type: String },
+  nextStep: { type: String }
+}, { _id: false }); // Disable _id for subdocuments to keep the structure clean
+
 const summarizeSchema = new mongoose.Schema({
   meeting_id: {
     type: String,
@@ -10,8 +18,8 @@ const summarizeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  summarize: {
-    type: String,
+  summary: {
+    type: [summarySectionSchema], 
     required: true,
   },
 });
