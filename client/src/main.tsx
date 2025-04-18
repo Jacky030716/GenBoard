@@ -28,6 +28,8 @@ import TraineeMeetingSummary from "./pages/trainee/TraineeMeetingSummary.tsx";
 import TraineeMeetingSummaryDetail from "./pages/trainee/TraineeMeetingSummaryDetail.tsx";
 
 import Test from "./ni_testing/Test.tsx";
+import TraineeStartMeeting from "./pages/trainee/TraineeStartMeeting.tsx";
+import TraineeMeetingEvaluation from "./pages/trainee/TraineeMeetingEvaluation.tsx";
 
 export const queryClient = new QueryClient();
 
@@ -68,6 +70,12 @@ createRoot(document.getElementById("root")!).render(
             <Route
               path="meeting-summary/:meetingId"
               element={<TraineeMeetingSummaryDetail />}
+            />
+
+            <Route path="start-meeting" element={<TraineeStartMeeting />} />
+            <Route
+              path="start-meeting/:meetingId"
+              element={<TraineeMeetingEvaluation />}
             />
 
             <Route path="feedback" element={<TraineeFeedback />} />
