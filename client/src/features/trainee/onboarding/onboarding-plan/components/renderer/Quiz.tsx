@@ -7,9 +7,16 @@ interface QuizProps {
     option_text: string;
     option_bool: boolean;
   }[];
+  setAnsweredQuestions: (count: any) => void;
+  setCorrectAnswers: (count: any) => void;
 }
 
-export const Quiz = ({ text, options }: QuizProps) => {
+export const Quiz = ({
+  text,
+  options,
+  setAnsweredQuestions,
+  setCorrectAnswers,
+}: QuizProps) => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
@@ -19,6 +26,12 @@ export const Quiz = ({ text, options }: QuizProps) => {
   }) => {
     setSelectedOption(option.option_text);
     setIsCorrect(option.option_bool);
+
+    setAnsweredQuestions((prev: any) => prev + 1);
+
+    if (option.option_bool) {
+      setCorrectAnswers((prev: any) => prev + 1);
+    }
   };
 
   return (

@@ -1,6 +1,5 @@
 import { Guideline } from "./renderer/Guideline";
 import { MarkdownViewer } from "./renderer/MarkdownViewer";
-import { PdfViewer } from "./renderer/PdfViewer";
 import { Quizzes } from "./renderer/Quizzes";
 // import { Quiz } from "./renderer/Quiz"; // Assuming you have this component
 // import { CodeTest } from "./renderer/CodeTest"; // Assuming you have this component
@@ -8,6 +7,7 @@ import { Quizzes } from "./renderer/Quizzes";
 interface OnboardingRendererProps {
   currentTask: any;
   currentTaskId?: string;
+  onContinue?: () => void;
 }
 
 interface SubTask {
@@ -20,6 +20,7 @@ interface SubTask {
 export const OnboardingRenderer = ({
   currentTask,
   currentTaskId,
+  onContinue,
 }: OnboardingRendererProps) => {
   if (!currentTask) return null;
 
@@ -36,27 +37,17 @@ export const OnboardingRenderer = ({
   const activeSubtask = findSubtask();
   const taskToRender = activeSubtask || currentTask;
 
-  console.log("Task to render:", taskToRender);
-
   const renderContent = () => {
-    // If we're viewing a subtask or a task with specific content
     if (taskToRender) {
-      // Handle different content types
-      // PDF content typically ends with .pdf
-      if (
-        typeof taskToRender.content === "string" &&
-        taskToRender.content.endsWith(".pdf")
-      ) {
-        return <PdfViewer path={taskToRender.content} />;
-      }
-
       // Handle guidelines/guides for m2 module or guide- prefixed content
       if (
         taskToRender.type_module === "m2" ||
         (typeof taskToRender.content === "string" &&
           taskToRender.content.startsWith("guide-"))
       ) {
-        return <Guideline content={taskToRender.content} />;
+        return (
+          <Guideline content={taskToRender.content} onContinue={onContinue} />
+        );
       }
 
       // Handle markdown content
@@ -64,12 +55,24 @@ export const OnboardingRenderer = ({
         typeof taskToRender.content === "string" &&
         taskToRender.content.endsWith(".md")
       ) {
-        return <MarkdownViewer path={`/markdowns/${taskToRender.content}`} />;
+        return (
+          <MarkdownViewer
+            path={`/markdowns/${taskToRender.content}`}
+            type={taskToRender.type}
+            onContinue={onContinue}
+          />
+        );
       }
 
       // Handle quiz type
       if (taskToRender.type === "quiz") {
-        return <Quizzes quizzes={taskToRender.content} />;
+        return (
+          <Quizzes
+            title={taskToRender.title}
+            quizzes={taskToRender.content}
+            onContinue={onContinue}
+          />
+        );
       }
 
       // // Handle code test type
@@ -79,12 +82,16 @@ export const OnboardingRenderer = ({
 
       // Default case: show as plain text/guideline if it's a string
       if (typeof taskToRender.content === "string") {
-        return <Guideline content={taskToRender.content} />;
+        return (
+          <Guideline content={taskToRender.content} onContinue={onContinue} />
+        );
       }
     }
 
     return <div>No content available for this task.</div>;
   };
 
-  return <div className="w-full flex justify-center">{renderContent()}</div>;
+  return (
+    <div className="w-full h-full flex justify-center">{renderContent()}</div>
+  );
 };

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AssemblyAI } from "assemblyai";
-import { GoogleGenAI } from '@google/genai';
+import { GoogleGenAI } from "@google/genai";
 
 const AssemblyAI_API_KEY = import.meta.env.VITE_ASSEMBLYAI_API_KEY!;
 const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY!;
@@ -16,7 +16,7 @@ const assemblyClient = new AssemblyAI({
 
 // Setup Gemini client
 const genAI = new GoogleGenAI({
-  apiKey: GEMINI_API_KEY
+  apiKey: GEMINI_API_KEY,
 });
 
 const GenerateAiSummarize = ({ videoLink }: { videoLink: string }) => {
@@ -58,7 +58,7 @@ const GenerateAiSummarize = ({ videoLink }: { videoLink: string }) => {
           `;
           const response = await genAI.models.generateContent({
             model: "gemini-1.5-pro-latest",
-            contents: prompt
+            contents: prompt,
           });
 
           let raw = response.text ?? "";
@@ -66,16 +66,17 @@ const GenerateAiSummarize = ({ videoLink }: { videoLink: string }) => {
           // ✅ Remove markdown formatting (```json ... ```)
           raw = raw.trim();
           if (raw.startsWith("```json")) {
-            raw = raw.replace(/^```json/, "").replace(/```$/, "").trim();
+            raw = raw
+              .replace(/^```json/, "")
+              .replace(/```$/, "")
+              .trim();
           } else if (raw.startsWith("```")) {
             raw = raw.replace(/^```/, "").replace(/```$/, "").trim();
           }
-          
+
           const summary = JSON.parse(raw);
           setSummary(JSON.stringify(summary, null, 2));
           console.log("Summary:", summary);
-
-
         }
       } catch (error) {
         console.error("Error during transcription/summarization:", error);

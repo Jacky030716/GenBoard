@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const resultItemSchema = new mongoose.Schema({
   title: {
@@ -12,6 +12,7 @@ const resultItemSchema = new mongoose.Schema({
   feedback: {
     type: String,
     required: true,
+    default: "No feedback provided",
   },
 });
 
@@ -26,4 +27,4 @@ const resultSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Result', resultSchema);
+module.exports = mongoose.model("Result", resultSchema);

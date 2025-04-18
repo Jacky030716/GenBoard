@@ -20,6 +20,13 @@ interface PlanSidebarProps {
 export const PlanSidebar = ({ tasks, currentPlan }: PlanSidebarProps) => {
   const { taskId } = useParams<{ taskId: string }>();
 
+  const weekRanges =
+    currentPlan === "month1"
+      ? "Week 1 - Week 4"
+      : currentPlan === "month2"
+      ? "Week 5 - Week 8"
+      : "Week 9 - Week 12";
+
   const isActive = (task: Task) => {
     if (!task || !taskId) return false;
 
@@ -43,7 +50,7 @@ export const PlanSidebar = ({ tasks, currentPlan }: PlanSidebarProps) => {
       <SidebarHeader />
       <div className="flex-1 w-full flex flex-col gap-4 justify-between font-poppins overflow-x-hidden overflow-y-auto">
         <div className="rounded-xl bg-[#393D5E] p-4 text-white font-semibold">
-          Week 1 - Week 4
+          {weekRanges}
         </div>
 
         <div className="flex-1 flex flex-col gap-4">

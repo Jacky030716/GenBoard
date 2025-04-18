@@ -1,6 +1,11 @@
-import { NavLink, useParams } from "react-router";
+import { NavLink, useNavigate, useParams } from "react-router";
 import { OnboardingRenderer } from "./OnboardingRenderer";
-import { Button } from "@/components/ui/button";
+import { useGetResult } from "../hooks/use-get-result";
+import {
+  QuizResultProps,
+  useSubmitQuizResult,
+} from "../hooks/use-submit-quiz-result";
+import { useUpdateQuizResult } from "../hooks/use-update-quiz-result";
 
 interface OnboardingModuleMainSectionProps {
   tasks: any;
@@ -11,12 +16,18 @@ export const OnboardingModuleMainSection = ({
   tasks,
   currentPlan,
 }: OnboardingModuleMainSectionProps) => {
+  const navigate = useNavigate();
+
   const { taskId } = useParams<{ taskId: string }>();
+  const uid = localStorage.getItem("uid") as string;
+
+  // Get the current result of the user
+  const { data: result, isLoading: isResultLoading } = useGetResult(uid);
+  const { updateQuizResult, updateLoading } = useUpdateQuizResult();
+  const { submitQuizResult, isLoading: isSubmitting } = useSubmitQuizResult();
 
   // Helper function to find task and subtask based on taskId
   const findTaskAndSubtask = () => {
-    const idPart = taskId?.split("_")[0]; // Extract ID part, e.g., "1.4.1"
-
     // Check for main task
     for (const task of tasks) {
       if (`${task.index}_${task.title}` === taskId) {
@@ -114,27 +125,50 @@ export const OnboardingModuleMainSection = ({
       : "Onboarding Module";
   };
 
+  // Determine if current task is a quiz type
+  const isQuizTask = () => {
+    const taskToCheck = currentSubtask || currentTask;
+    return taskToCheck?.type === "quiz";
+  };
+
+  // Handle continue button click
+  const handleContinue = async (quizResult?: QuizResultProps) => {
+    const quizTask = isQuizTask();
+
+    // If it's a quiz and there are answers to submit
+    if (quizTask) {
+      try {
+        if (result.length === 0) {
+          submitQuizResult(quizResult as QuizResultProps);
+        } else {
+          updateQuizResult(quizResult as QuizResultProps);
+        }
+
+        // Navigate to next page
+        navigate(`/trainee/onboarding/plan/${currentPlan}/${nextPath}`);
+      } catch (error) {
+        // Handle error - maybe show a toast
+        console.error("Failed to submit quiz:", error);
+      }
+    } else {
+      navigate(`/trainee/onboarding/plan/${currentPlan}/${nextPath}`);
+    }
+  };
+
+  const isLoading = isResultLoading || isSubmitting || updateLoading;
+
   return (
     <div className="p-12">
       <h1 className="text-2xl font-bold mb-6 font-montserrat">
         {renderTitle()}
       </h1>
 
-      <div className="w-full flex flex-col justify-center items-center">
+      <div className="w-full h-full flex flex-col justify-center items-center">
         <OnboardingRenderer
           currentTask={currentSubtask || currentTask}
           currentTaskId={taskId}
+          onContinue={handleContinue}
         />
-
-        {/* Next Button */}
-        <Button
-          className="mt-12 mx-auto w-[500px] rounded-full bg-[#5F6489] hover:bg-[#5F6489]/90 text-white text-lg font-semibold h-14"
-          asChild
-        >
-          <NavLink to={`/trainee/onboarding/plan/${currentPlan}/${nextPath}`}>
-            Continue
-          </NavLink>
-        </Button>
       </div>
     </div>
   );
