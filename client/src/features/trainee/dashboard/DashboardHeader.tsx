@@ -1,5 +1,4 @@
 import { formatDate } from "@/lib/utils";
-import { Bell } from "lucide-react";
 
 interface DashboardHeaderProps {
   startDate: string;
@@ -24,11 +23,6 @@ export const DashboardHeader = ({
           <h3 className="font-semibold">
             End date: {formatDate(new Date(completionDate))}
           </h3>
-        </div>
-
-        {/* Notification button */}
-        <div className="bg-[#596D94] rounded-lg size-10 flex items-center justify-center text-white">
-          <Bell />
         </div>
       </div>
     </div>

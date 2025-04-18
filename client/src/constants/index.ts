@@ -18,3 +18,5 @@ export const timeSlots = [
   "04:30 PM",
   "05:00 PM",
 ];
+
+export const TASKS_NUMBER = 38;

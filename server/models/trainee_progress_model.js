@@ -1,14 +1,29 @@
 const mongoose = require("mongoose");
 
 const completedSchema = new mongoose.Schema({
-  task: String, // Format: "1.2_Learn Git Rule (index + title)"
-  completed: Boolean,
+  index: {
+    type: String,
+    required: true,
+  }, // Format: "1.2"
+  isCompleted: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const traineeProgressSchema = new mongoose.Schema({
-  uid: String,
-  currentTask: String, // Format: "1.2_Learn Git Rule (index + title)"
-  result: [completedSchema],
+  uid: {
+    type: String,
+    required: true,
+  },
+  currentIndex: {
+    type: String,
+    default: "1.1",
+  }, // Format: "1.2"
+  result: {
+    type: [completedSchema],
+    default: [],
+  },
 });
 
 module.exports = mongoose.model("TraineeProgress", traineeProgressSchema);

@@ -15,8 +15,8 @@ interface MeetingScheduleProps {
 export const MeetingSchedule = ({ meetings }: MeetingScheduleProps) => {
   return (
     <div className="md:col-span-2">
-      <div className="bg-black rounded-2xl overflow-hidden shadow-md font-montserrat p-6 flex flex-col gap-6">
-        <div className="text-white">
+      <div className="bg-white rounded-2xl h-full overflow-hidden shadow-md font-montserrat p-6 flex flex-col gap-6">
+        <div className="text-black">
           <h2 className="text-xl text-center font-semibold mb-4">
             Meeting Schedule
           </h2>

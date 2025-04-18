@@ -46,7 +46,12 @@ export const MeetingCalendar = ({
 
   return (
     <div className={cn("w-full flex gap-4", !showCard && "justify-center")}>
-      <div className="w-fit rounded-lg border shadow bg-white py-4 px-8">
+      <div
+        className={cn(
+          "w-fit rounded-lg border shadow border-gray-100 py-4 px-8",
+          showCard && "bg-white"
+        )}
+      >
         <Calendar
           mode="single"
           selected={selectedDay}

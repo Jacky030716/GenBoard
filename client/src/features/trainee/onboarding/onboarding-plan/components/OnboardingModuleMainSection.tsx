@@ -6,6 +6,7 @@ import {
   useSubmitQuizResult,
 } from "../hooks/use-submit-quiz-result";
 import { useUpdateQuizResult } from "../hooks/use-update-quiz-result";
+import { useUpdateProgress } from "../hooks/use-update-progress";
 
 interface OnboardingModuleMainSectionProps {
   tasks: any;
@@ -24,6 +25,8 @@ export const OnboardingModuleMainSection = ({
   // Get the current result of the user
   const { data: result, isLoading: isResultLoading } = useGetResult(uid);
   const { updateQuizResult, updateLoading } = useUpdateQuizResult();
+  const { updateProgress, isLoading: updateProgressLoading } =
+    useUpdateProgress();
   const { submitQuizResult, isLoading: isSubmitting } = useSubmitQuizResult();
 
   // Helper function to find task and subtask based on taskId
@@ -133,6 +136,8 @@ export const OnboardingModuleMainSection = ({
 
   // Handle continue button click
   const handleContinue = async (quizResult?: QuizResultProps) => {
+    if (isLoading) return;
+
     const quizTask = isQuizTask();
 
     // If it's a quiz and there are answers to submit
@@ -144,18 +149,28 @@ export const OnboardingModuleMainSection = ({
           updateQuizResult(quizResult as QuizResultProps);
         }
 
+        await updateProgress({
+          currentIndex: currentSubtask?.index || currentTask?.index,
+          newIndex: nextPath.split("_")[0],
+        });
+
         // Navigate to next page
         navigate(`/trainee/onboarding/plan/${currentPlan}/${nextPath}`);
       } catch (error) {
-        // Handle error - maybe show a toast
         console.error("Failed to submit quiz:", error);
       }
     } else {
+      await updateProgress({
+        currentIndex: currentSubtask?.index || currentTask?.index,
+        newIndex: nextPath.split("_")[0],
+      });
+
       navigate(`/trainee/onboarding/plan/${currentPlan}/${nextPath}`);
     }
   };
 
-  const isLoading = isResultLoading || isSubmitting || updateLoading;
+  const isLoading =
+    isResultLoading || isSubmitting || updateLoading || updateProgressLoading;
 
   return (
     <div className="p-12">
