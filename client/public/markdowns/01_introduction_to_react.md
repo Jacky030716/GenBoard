@@ -1,29 +1,3 @@
-![30 Days of React banner](../images/30_days_of_react_banner_day_2.jpg)
-
-- [Getting Started React](#getting-started-react)
-  - [1. What is React?](#1-what-is-react)
-  - [2. Why React?](#2-why-react)
-    - [React vs Vue popularity in October 2020](#react-vs-vue-popularity-in-october-2020)
-    - [React vs Vue popularity in February 2020](#react-vs-vue-popularity-in-february-2020)
-  - [3. JSX](#3-jsx)
-    - [JSX Element](#jsx-element)
-    - [Commenting a JSX element](#commenting-a-jsx-element)
-    - [Rendering a JSX Element](#rendering-a-jsx-element)
-    - [Style and className in JSX](#style-and-classname-in-jsx)
-    - [Injecting data to a JSX Element](#injecting-data-to-a-jsx-element)
-      - [Injecting a string to a JSX Element](#injecting-a-string-to-a-jsx-element)
-      - [Injecting a number to a JSX Element](#injecting-a-number-to-a-jsx-element)
-      - [Injecting an array to a JSX Element](#injecting-an-array-to-a-jsx-element)
-      - [Injecting an object to a JSX Element](#injecting-an-object-to-a-jsx-element)
-  - [Exercises](#exercises)
-    - [Exercises: What is React?](#exercises-what-is-react)
-    - [Exercises: Why React?](#exercises-why-react)
-    - [Exercises: JSX](#exercises-jsx)
-    - [Exercises: JSX Elements](#exercises-jsx-elements)
-    - [Exercises: Inline Style](#exercises-inline-style)
-    - [Exercises: Internal Styles](#exercises-internal-styles)
-    - [Exercise: Inject data to JSX](#exercise-inject-data-to-jsx)
-
 ## Getting Started React
 
 This section covers prerequisites to get started with React. You should have a good understanding of the following technologies:
@@ -55,25 +29,6 @@ To summarize:
 
 React is one of the most popular JavaScript libraries. Many developers and companies have been using it for the last couple of years. Its popularity has been growing fast and it has a huge community. How do we measure popularity? One measure of popularity could be GitHub repository stars, watchers and forks. Let us compare the popularity of [React](https://github.com/facebook/react) and [Vue](https://github.com/vuejs/vue). As of today, the popularity between the two most popular JavaScript looks like as shown on the diagram. From the diagram, you can speculate the most popular JavaScript library. You may look at the number of watchers, stars and forks for both React and Vue. These alone will not be a very good measure of popularity, but still it tells a little bit about the popularity of the two technologies. If I have to recommend another JavaScript library next to React, it would be Vue.js.
 
-#### React vs Vue popularity in October 2020
-
-React Official GitHub Repository
-
-![React Popularity October 2020](../images/react_repo_1_oct_2020.png)
-
-Vue Official GitHub Repository
-
-![Vue Popularity October 2020](../images/vue_repo_1_oct_2020.png)
-
-#### React vs Vue popularity in February 2020
-
-React Official GitHub Repository
-
-![React Popularity February 2020](../images/react_popularity.png)
-
-Vue Official GitHub Repository
-
-![Vue Popularity February 2020](../images/vue_popularity.png)
 
 Why we choose to use React ? We use it because of the following reasons:
 
@@ -275,7 +230,6 @@ Now, you knew JSX and JSX element. Let us render the JSX element on the browser,
 </html>
 ```
 
-![Rendering JSX](../images/rendering_jsx.png)
 
 Let us render more content. To render more content, the JSX element should have more HTML elements. For instance, we can create a header of a website and header may have a title, subtitle, author or date etc. Remember, we can render only one JSX element at a time.
 [Live on code pen](https://codepen.io/Asabeneh/full/QWbGWeY).
@@ -324,7 +278,6 @@ Let us render more content. To render more content, the JSX element should have 
 </html>
 ```
 
-![Rendering more content](../images/rendering_more_jsx_content_.png)
 
 We have created a JSX element for the header of the website. How about the main and the footer for the website? Similar to the header, let us create a JSX element for the main and the footer.
 
@@ -474,11 +427,8 @@ Now, let us put everything together and render it to the browser. [Live on code 
 </html>
 ```
 
-![Rendering Multiple JSX Elements](../images/rendering_multiple_jsx_elements.png)
-
 Let us apply some style to our JSX elements and see the result.
 
-![Styling JSX Element](../images/styling_jsx_element.png).
 
 Now, lets us apply style the header part only [Live on code pen](https://codepen.io/Asabeneh/full/ZEGBYBG).
 
@@ -535,8 +485,6 @@ const inputField = (
 The id used in the input element is not for styling purpose, instead to refer the label to the input field.
 
 If class is used instead of className or for instead of htmlFor you will see such kind of warning.
-
-![Class Name warning](../images/className_warning.png)
 
 Now, you know how to use the inline style and how to use className. Let us style all the JSX elements.
 
@@ -626,8 +574,6 @@ Now, you know how to use the inline style and how to use className. Let us style
   </body>
 </html>
 ```
-
-![Styling all JSX elements](../images/styling_all_jsx_elements.png)
 
 Instead of style object using regular styling method is more easy than the one above. Now, let us use internal style to style all the JSX. It is also possible to use external styling method. [Live on code pen](https://codepen.io/Asabeneh/full/QWbGwge)
 
@@ -797,8 +743,6 @@ Instead of style object using regular styling method is more easy than the one a
   </body>
 </html>
 ```
-
-![Internal Style](../images/internal_style.png)
 
 #### Injecting data to a JSX Element
 
@@ -1109,8 +1053,6 @@ Now, let us put everything together. Here, in the example below, the data is inj
 </html>
 ```
 
-![Dynamic Data](../images/dynamic_data.png)
-
 As you can see the lists are all in one line. Therefore, we should format the list the way we want, before we inject it to JSX. In order to format the list, we should modify the array before we will inject it to JSX. We can modify the array using _map_. As a react developer you should have a very good understanding of functional programming(map, filter, reduce, find, some, every). If you don't have good understanding of functional programming, check out day 1.
 
 ```js
@@ -1322,7 +1264,6 @@ In the following code example, the list is now containing list elements and it i
 
 Rendering lists
 
-![List Id](../images/map_list_id.png)
 As you can see above, now the lists are formatted properly, but there is a warning on the console, which says each list child should have a unique key. In the array, we do not have id, but it is common to pass id as a unique value, when you have id in your data. Now, let us just pass each item with a unique key to remove the warning.
 
 ```html
@@ -1525,8 +1466,6 @@ As you can see above, now the lists are formatted properly, but there is a warni
   </body>
 </html>
 ```
-
-![Removing the warning ](../images/removing_unique_id_warning.png)
 
 Now, you have a very good understanding of how to create JSX elements and also how to inject data to JSX. In the next section, we will talk about how to use create-react-app and components. Components are more powerful and useful than JSX.
 

@@ -1,19 +1,3 @@
-![30 Days of React banner](../images/30_days_of_react_banner_day_4.jpg)
-
-- [Components](#components)
-  - [Big picture of components](#big-picture-of-components)
-  - [JavaScript function](#javascript-function)
-  - [JavaScript Class](#javascript-class)
-  - [Creating React Component](#creating-react-component)
-    - [Functional Component](#functional-component)
-    - [Rendering components](#rendering-components)
-    - [Injecting data to JSX in React Component](#injecting-data-to-jsx-in-react-component)
-    - [Further on Functional components](#further-on-functional-components)
-- [Exercises: Components](#exercises-components)
-  - [Exercises: Level 1](#exercises-level-1)
-  - [Exercises: Level 2](#exercises-level-2)
-  - [Exercises: Level 3](#exercises-level-3)
-
 # Components
 
 A React component is a small, reusable code, which is responsible for one part of the application UI. A React application is an aggregation of components. React can help us to build reusable components. The following diagram shows different components. All the components have different border colors. In React we assemble different components together to create an application. We use JavaScript functions or classes to make components. If we use a function, the component will be a functional component, but if we use a class, the component will be a class-based component.
@@ -30,8 +14,6 @@ So, let us change all the JSX to components. Components in React are JavaScript 
 ## Big picture of components
 
 In the previous section we agreed, that a website or an application is made of buttons, forms, texts, media objects, header, section, article and footer. If we have a million-dollar button, we can use this button all the time, instead of recreating it all over again, whenever we need a button. The same goes for input fields, forms, header or footer. That is where the power of the component comes. In the following diagram, the header, main and footer are components. Inside the main there is also a user card component and a text section component. All the different colors represent different components. How many colors do you see? Each color represent a single component. We have five components in this diagram.
-
-![Components](../images/components_example.png)
 
 Before we jump into React components, let's do some functions and class refreshers.
 
@@ -271,8 +253,6 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 ```
 
-![Rendering Components](../images/rendering_componnets.png)
-
 ### Injecting data to JSX in React Component
 
 So far, we used static data on the JSX elements. Now let's pass different data types as dynamic data. The dynamic data could be strings, numbers, booleans, arrays or objects. Let us see each of the data types step by step. To inject data to a JSX we use the {} bracket.
@@ -466,7 +446,7 @@ ReactDOM.render(<HexaColor />, rootElement);
 
 # Exercises: Components
 
-## Exercises: Level 1
+## Exercises
 
 1. What is the difference between a regular function and an arrow function?
 2. What is a React Component?
@@ -478,23 +458,5 @@ ReactDOM.render(<HexaColor />, rootElement);
 8. Make a reusable InputField component.
 9. Make a reusable alert box component with one div parent element and one p child element of the div(warning alert box, success alert box).
 
-## Exercises: Level 2
-
-1. Create functional components and display the following images
-   ![Front end](../images/frontend_technologies.png)
-
-2. Use functional component to create the following design
-
-![News Letter](../images/news_letter_design.png)
-
-## Exercises: Level 3
-
-1.  Use the given hexadecimal color generator in the example to create these random colors
-
-![Hexadecimal colors](../images/hexadecimal_color_exercise.png)
-
-2. Use functional component to design the following user card.
-
-   ![User Card](../images/user_card_design_jsx.png)
 
 🎉 CONGRATULATIONS ! 🎉
