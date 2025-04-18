@@ -20,8 +20,6 @@ export const useUpdateProgress = () => {
         previousResult: data.currentIndex,
       });
 
-      console.log("Update Progress Response:", response.data);
-
       return response.data;
     },
   });

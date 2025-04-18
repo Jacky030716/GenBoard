@@ -4,7 +4,7 @@ const resultController = {
   getResultById: async (req, res) => {
     try {
       const uid = req.params.uid;
-      const response = await resultService.getResultById(uid);
+      const [response] = await resultService.getResultById(uid);
       res.status(200).json(response);
     } catch (error) {
       res.status(400).json({ message: error.message });
@@ -20,11 +20,11 @@ const resultController = {
 
       const existingResult = await resultService.getResultById(uid);
 
-      if (existingResult) {
+      if (existingResult && existingResult.length > 0) {
         // update the existing result
         const updatedResult = await resultService.updateResult(uid, result);
         return res.status(200).json(updatedResult);
-      }else{
+      } else {
         // create a new result
         const newResult = await resultService.createResult(uid, result);
         return res.status(201).json(newResult);
@@ -33,7 +33,7 @@ const resultController = {
       res.status(400).json({ message: error.message });
     }
   },
-  
+
   updateResult: async (req, res) => {
     try {
       const { uid, result } = req.body;

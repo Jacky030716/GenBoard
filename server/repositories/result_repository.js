@@ -1,4 +1,3 @@
-const { findById } = require("../models/ai_summarize_report_model");
 const Result = require("../models/result_model");
 
 const resultRepository = {
@@ -12,11 +11,13 @@ const resultRepository = {
     });
     return await resultItem.save();
   },
-  updateResult: async (uid, result) => {
+  updateResult: async (uid, newResult) => {
     return await Result.findOneAndUpdate(
       { uid: uid },
-      { result: result },
-      { new: true }
+      {
+        $push: { result: newResult }, // Push the new result into the result array
+      },
+      { new: true } // Return the updated document
     );
   },
 };

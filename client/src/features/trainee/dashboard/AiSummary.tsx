@@ -1,6 +1,8 @@
 import { Genbot } from "@/assets";
 import { useGetResult } from "../onboarding/onboarding-plan/hooks/use-get-result";
 import { Button } from "@/components/ui/button";
+import { useGetAiEvaluationResult } from "./hooks/use-get-ai-evaluate-result";
+import { useAiEvaluateResult } from "./hooks/use-ai-evaluate-result";
 
 const strengths = [
   "Excellent quiz accuracy (avg. score: 92%)",
@@ -15,8 +17,21 @@ const weaknesses = [
 export const AiSummary = () => {
   const uid = localStorage.getItem("uid") as string;
   const { data: existingResult, isLoading } = useGetResult(uid);
+  const { evaluationResult, isLoading: getEvaluationLoading } =
+    useGetAiEvaluationResult(uid);
 
-  if (isLoading) {
+  console.log("evaluationResult", evaluationResult);
+
+  const { evaluateResult, isLoading: evaluationLoading } =
+    useAiEvaluateResult();
+
+  const handleEvaluate = async () => {
+    evaluateResult(existingResult?.result);
+  };
+
+  const requiredTasks = existingResult?.result?.length || 0;
+
+  if (isLoading || getEvaluationLoading) {
     return (
       <div className="md:col-span-3 h-full bg-white rounded-2xl overflow-hidden shadow-md font-montserrat p-6 flex flex-col gap-6">
         <div className="flex items-center justify-center h-full">
@@ -35,8 +50,8 @@ export const AiSummary = () => {
         </h2>
 
         <div className="flex-1 flex justify-center items-center p-8 space-y-4">
-          {/* If the user does not have any result */}
-          {existingResult?.length === 0 ? (
+          {/* If the user does not have any evaluation result */}
+          {!evaluationResult ? (
             <div className="flex flex-col gap-4 items-center justify-center">
               <div className="bg-rose-100 rounded-full p-4 flex items-center justify-center animate-float">
                 <img src={Genbot} alt="Genbot" className="size-16 mx-auto" />
@@ -44,7 +59,8 @@ export const AiSummary = () => {
               <div className="flex flex-col items-center gap-2">
                 <Button
                   className="w-fit rounded-full bg-rose-800 text-white hover:bg-rose-700 h-10 px-6"
-                  disabled={true}
+                  disabled={requiredTasks < 4 || evaluationLoading}
+                  onClick={handleEvaluate}
                 >
                   Evaluate Performance
                 </Button>
@@ -63,9 +79,11 @@ export const AiSummary = () => {
                   <h3 className="font-bold text-lg">Strengths:</h3>
                 </div>
                 <ul className="list-disc ml-6 space-y-1">
-                  {strengths.map((strength, index) => (
-                    <li key={`strength-${index}`}>{strength}</li>
-                  ))}
+                  {evaluationResult?.strength.map(
+                    (strength: string[], index: number) => (
+                      <li key={`strength-${index}`}>{strength}</li>
+                    )
+                  )}
                 </ul>
               </div>
 
@@ -76,9 +94,11 @@ export const AiSummary = () => {
                   <h3 className="font-bold text-lg">Weaknesses:</h3>
                 </div>
                 <ul className="list-disc ml-6 space-y-1">
-                  {weaknesses.map((weakness, index) => (
-                    <li key={`weakness-${index}`}>{weakness}</li>
-                  ))}
+                  {evaluationResult?.weakness.map(
+                    (weakness: string[], index: number) => (
+                      <li key={`weakness-${index}`}>{weakness}</li>
+                    )
+                  )}
                 </ul>
               </div>
             </div>

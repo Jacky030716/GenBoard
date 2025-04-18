@@ -12,8 +12,6 @@ export const DashboardMainSection = () => {
   const { traineeProgress, isLoading: progressLoading } =
     useGetTraineeProgress(uid);
 
-  console.log(traineeProgress);
-
   const onboardingStatus = onboardingProgressQuery.data;
 
   const isLoading = onboardingProgressQuery.isLoading || progressLoading;
