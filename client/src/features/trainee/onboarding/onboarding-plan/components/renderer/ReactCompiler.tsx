@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Genbot } from "@/assets";
 import { CodeAnalysisModal } from "./CodeAnalysisModal";
 import { genAI } from "@/lib/gemini";
+import httpClient from "@/lib/httpClient";
 
 interface AnalysisScore {
   score: number;
@@ -16,9 +17,14 @@ interface CodeAnalysisResult {
   security: AnalysisScore;
 }
 
-// Setup Gemini client
+const keyMapping: Record<string, string> = {
+  codeQuality: "Code Quality and Style",
+  performance: "Performance and Efficiency",
+  security: "Security",
+};
 
 const defaultCode = `
+// Write your React code here
 function Hello() {
   return (
     <div>
@@ -37,6 +43,8 @@ function Hello() {
     </div>
   )
   }
+
+  // Do not modify this line
 render(<Hello />)
 `;
 const ReactCompiler: React.FC = () => {
@@ -98,6 +106,23 @@ const ReactCompiler: React.FC = () => {
       }
 
       const analysis = JSON.parse(raw);
+
+      // Save the analysis result to db
+      for (const key in analysis) {
+        try {
+          await httpClient.post("/result", {
+            uid: localStorage.getItem("uid"),
+            result: {
+              title: keyMapping[key],
+              score: analysis[key].score,
+              feedback: analysis[key].feedback,
+            },
+          });
+        } catch (error) {
+          console.error("Failed to save analysis result:", error);
+        }
+      }
+
       setCodeAnalysis(analysis);
       setIsAnalysisModalOpen(true);
     } catch (error) {

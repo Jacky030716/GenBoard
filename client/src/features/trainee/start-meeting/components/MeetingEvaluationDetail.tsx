@@ -1,15 +1,43 @@
 import { formatDate } from "@/lib/utils";
-import { Calendar, Clock, NotebookPen, User } from "lucide-react";
+import { Calendar, Clock, NotebookPen } from "lucide-react";
 import { MeetingItem } from "./MeetingItem";
 
-export const MeetingEvaluationDetail = () => {
+interface MeetingEvaluationDetailProps {
+  meetingDetail: {
+    title: string;
+    nextStep: string;
+    keyPoint: string;
+    decision: string;
+    actionItem: string;
+  };
+}
+
+export const MeetingEvaluationDetail = ({
+  meetingDetail,
+}: MeetingEvaluationDetailProps) => {
+  const { title, nextStep, keyPoint, decision, actionItem } = meetingDetail;
+
+  const formatText = (text: string) => {
+    if (!text || text.trim() === "") {
+      return <p className="text-gray-400 text-sm">No information provided.</p>;
+    }
+
+    const bulletPoints = text.split("-").filter((point) => point.trim() !== "");
+    return (
+      <ul className="list-disc list-inside text-gray-600 text-sm">
+        {bulletPoints.map((point, index) => (
+          <li key={index}>{point.trim()}</li>
+        ))}
+      </ul>
+    );
+  };
+
   return (
     <div className="w-full flex flex-col gap-8">
-      <div className="grid grid-cols-4 gap-4 w-full font-poppins ml-auto">
+      <div className="grid grid-cols-3 gap-4 w-full font-poppins ml-auto">
+        <MeetingItem icon={NotebookPen} text={title} />
         <MeetingItem icon={Calendar} text={formatDate(new Date())} />
         <MeetingItem icon={Clock} text="10:00 PM" />
-        <MeetingItem icon={User} text="Bruce Lee" />
-        <MeetingItem icon={NotebookPen} text="Urgent Meeting" />
       </div>
 
       {/* Meeting evaluation */}
@@ -18,56 +46,23 @@ export const MeetingEvaluationDetail = () => {
           <h3 className="text-lg font-medium text-gray-800">
             Key Discussion Points
           </h3>
-          <p className="text-gray-600 text-sm">{"abc"}</p>
+          {formatText(keyPoint)}
         </div>
 
         <div className="bg-white rounded-lg shadow-md p-6 border-l-[6px] border-orange-500 hover:shadow-lg transition-shadow">
           <h3 className="text-lg font-medium text-gray-800">Decision Made</h3>
-          <p className="text-gray-600 text-sm">{"abc"}</p>
+          {formatText(decision)}
         </div>
 
         <div className="bg-white rounded-lg shadow-md p-6 border-l-[6px] border-teal-500 hover:shadow-lg transition-shadow">
           <h3 className="text-lg font-medium text-gray-800">Action Items</h3>
-          <p className="text-gray-600 text-sm">{"abc"}</p>
+          {formatText(actionItem)}
         </div>
-      </div>
 
-      <div className="w-full font-poppins">
-        <h3 className="font-semibold text-xl">Next Steps</h3>
-        <ol className="list-disc pl-6 mt-2 space-y-2">
-          <li className="text-gray-600 text-sm">
-            <span className="font-semibold">Action Item 1:</span> Complete the
-            assigned tasks by next week.
-          </li>
-          <li className="text-gray-600 text-sm">
-            <span className="font-semibold">Action Item 2:</span> Prepare for
-            the upcoming presentation.
-          </li>
-          <li className="text-gray-600 text-sm">
-            <span className="font-semibold">Action Item 3:</span> Follow up with
-            the team on project updates.
-          </li>{" "}
-          <li className="text-gray-600 text-sm">
-            <span className="font-semibold">Action Item 3:</span> Follow up with
-            the team on project updates.
-          </li>{" "}
-          <li className="text-gray-600 text-sm">
-            <span className="font-semibold">Action Item 3:</span> Follow up with
-            the team on project updates.
-          </li>{" "}
-          <li className="text-gray-600 text-sm">
-            <span className="font-semibold">Action Item 3:</span> Follow up with
-            the team on project updates.
-          </li>{" "}
-          <li className="text-gray-600 text-sm">
-            <span className="font-semibold">Action Item 3:</span> Follow up with
-            the team on project updates.
-          </li>{" "}
-          <li className="text-gray-600 text-sm">
-            <span className="font-semibold">Action Item 3:</span> Follow up with
-            the team on project updates.
-          </li>
-        </ol>
+        <div className="bg-white rounded-lg shadow-md p-6 border-l-[6px] border-yellow-500 hover:shadow-lg transition-shadow">
+          <h3 className="text-lg font-medium text-gray-800">Next Steps</h3>
+          {formatText(nextStep)}
+        </div>
       </div>
     </div>
   );

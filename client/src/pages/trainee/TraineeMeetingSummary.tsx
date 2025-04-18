@@ -1,14 +1,24 @@
 import { Button } from "@/components/ui/button";
 import { MeetingSummaryList } from "@/features/trainee/meeting-summary/components/MeetingSummaryList";
+import { useGetAllSummaries } from "@/features/trainee/meeting-summary/hooks/use-get-all-summaries";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router";
 
 const TraineeMeetingSummary = () => {
+  const { meetingSummaries, isLoading } = useGetAllSummaries();
   const navigate = useNavigate();
 
   const handleBack = () => {
     navigate(-1);
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex-1 flex items-center justify-center">
+        <p className="text-lg font-semibold">Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex-1 flex flex-col gap-12 w-full h-full bg-background-light p-8">
@@ -26,7 +36,10 @@ const TraineeMeetingSummary = () => {
 
       {/* Meeting Summary List */}
       <main className="bg-[#FFF7F7] flex-1 overflow-y-auto">
-        <MeetingSummaryList />
+        <MeetingSummaryList
+          meetingSummaries={meetingSummaries}
+          isLoading={isLoading}
+        />
       </main>
     </div>
   );

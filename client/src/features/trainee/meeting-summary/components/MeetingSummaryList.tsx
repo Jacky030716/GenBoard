@@ -1,7 +1,25 @@
 import { Button } from "@/components/ui/button";
 import { NavLink } from "react-router";
 
-export const MeetingSummaryList = () => {
+interface MeetingSummary {
+  meeting_id: string;
+  participant: string;
+  summary: {
+    title: string;
+  }[];
+}
+
+interface MeetingSummaryListProps {
+  meetingSummaries: MeetingSummary[];
+  isLoading: boolean;
+}
+
+export const MeetingSummaryList = ({
+  meetingSummaries,
+  isLoading,
+}: MeetingSummaryListProps) => {
+  console.log("Meeting Summaries:", meetingSummaries);
+
   return (
     <table className="w-full font-poppins">
       <thead>
@@ -15,30 +33,23 @@ export const MeetingSummaryList = () => {
         </tr>
       </thead>
       <tbody className="text-left font-medium">
-        <tr className=" text-black border-b">
-          <td className="p-4">Discuss stuff</td>
-          <td className="p-4">13 April 2025</td>
-          <td className="p-4">Victor</td>
-          <td className="p-4 text-center">
-            <Button
-              className="rounded-full bg-[#997FB2] hover:bg-[#997FB2]/90 text-white font-montserrat h-10 px-6"
-              asChild
-            >
-              <NavLink to={"/trainee/meeting-summary/1"}>View Summary</NavLink>
-            </Button>
-          </td>
-        </tr>
-
-        <tr className=" text-black border-b">
-          <td className="p-4">Enhance stuff</td>
-          <td className="p-4">15 April 2025</td>
-          <td className="p-4">Johan</td>
-          <td className="p-4 text-center">
-            <Button className="rounded-full bg-[#997FB2] hover:bg-[#997FB2]/90 text-white font-montserrat h-10 px-6">
-              View Summary
-            </Button>
-          </td>
-        </tr>
+        {meetingSummaries.map((item) => (
+          <tr key={item.meeting_id} className="text-black border-b">
+            <td className="p-4">{item.summary[0].title}</td>
+            <td className="p-4">13 April 2025</td>
+            <td className="p-4">{item.participant}</td>
+            <td className="p-4 text-center">
+              <Button
+                className="rounded-full bg-[#997FB2] hover:bg-[#997FB2]/90 text-white font-montserrat h-10 px-6"
+                asChild
+              >
+                <NavLink to={`/trainee/meeting-summary/${item.meeting_id}`}>
+                  View Summary
+                </NavLink>
+              </Button>
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );
