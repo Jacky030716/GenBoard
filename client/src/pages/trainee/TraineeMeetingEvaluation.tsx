@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { NavLink, useNavigate, useParams } from "react-router";
 
 const TraineeMeetingEvaluation = () => {
-  const { meetingId } = useParams<{ meetingId: string }>();
+  // const { meetingId } = useParams<{ meetingId: string }>();
 
   const navigate = useNavigate();
   const handleBack = () => {

@@ -1,29 +1,15 @@
 import { formatDate } from "@/lib/utils";
 import { Calendar, Clock, NotebookPen, User } from "lucide-react";
+import { MeetingItem } from "./MeetingItem";
 
 export const MeetingEvaluationDetail = () => {
   return (
     <div className="w-full flex flex-col gap-8">
       <div className="grid grid-cols-4 gap-4 w-full font-poppins ml-auto">
-        <div className="flex items-center justify-center gap-2 border-2 border-b-4 p-4 rounded-full shadow py-6">
-          <Calendar />
-          <span className="">{formatDate(new Date())}</span>
-        </div>
-
-        <div className="flex items-center justify-center gap-2 border-2 border-b-4 p-4 rounded-full shadow py-6">
-          <Clock />
-          <span className="">10:00 PM</span>
-        </div>
-
-        <div className="flex items-center justify-center gap-2 border-2 border-b-4 p-4 rounded-full shadow py-6">
-          <User />
-          <span className="">10:00 PM</span>
-        </div>
-
-        <div className="flex items-center justify-center gap-2 border-2 border-b-4 p-4 rounded-full shadow py-6">
-          <NotebookPen />
-          <span className="">Urgent Meeting</span>
-        </div>
+        <MeetingItem icon={Calendar} text={formatDate(new Date())} />
+        <MeetingItem icon={Clock} text="10:00 PM" />
+        <MeetingItem icon={User} text="Bruce Lee" />
+        <MeetingItem icon={NotebookPen} text="Urgent Meeting" />
       </div>
 
       {/* Meeting evaluation */}
@@ -48,7 +34,7 @@ export const MeetingEvaluationDetail = () => {
 
       <div className="w-full font-poppins">
         <h3 className="font-semibold text-xl">Next Steps</h3>
-        <ol className="list-disc">
+        <ol className="list-disc pl-6 mt-2 space-y-2">
           <li className="text-gray-600 text-sm">
             <span className="font-semibold">Action Item 1:</span> Complete the
             assigned tasks by next week.
