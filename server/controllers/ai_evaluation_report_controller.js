@@ -4,8 +4,14 @@ const aiEvaluationReportController = {
     createReport: async (req, res) => {
         try {
             const { uid, strength, weakness } = req.body;
-            const response = await aiEvaluationReportService.createReport(uid, strength, weakness);
-            res.status(201).json(response);
+            const existingReport = await aiEvaluationReportService.getReportById(uid);
+            if (existingReport) {
+                return res.status(400).json({ message: "Report already exists" });
+            }else{
+                const response = await aiEvaluationReportService.createReport(uid, strength, weakness);
+                res.status(201).json(response);
+            }
+            
         } catch (error) {
             res.status(400).json({ message: error.message });
         }
