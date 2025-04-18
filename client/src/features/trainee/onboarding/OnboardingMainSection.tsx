@@ -34,7 +34,9 @@ export const OnboardingMainSection = () => {
           availableDate="4 May 2025"
           isCompleted={true}
           buttonText="Completed"
-          onButtonClick={() => handleCourseAction("month1")}
+          onButtonClick={() =>
+            handleCourseAction(`month1/${`1.1_View Company Handbook`}`)
+          }
         />
         <OnboardingPlan
           month={2}
@@ -45,7 +47,11 @@ export const OnboardingMainSection = () => {
           moduleImg={Module2}
           isCompleted={false}
           buttonText="Resume Course"
-          onButtonClick={() => handleCourseAction("month2")}
+          onButtonClick={() =>
+            handleCourseAction(
+              `month2/${`2.1_View Technical & Architecture Docs`}`
+            )
+          }
         />
         <OnboardingPlan
           month={3}
@@ -56,7 +62,11 @@ export const OnboardingMainSection = () => {
           moduleImg={Module3}
           isCompleted={false}
           buttonText="Resume Course"
-          onButtonClick={() => handleCourseAction("month3")}
+          onButtonClick={() =>
+            handleCourseAction(
+              `month3/3.1_View Sprint Flow & Team Collaboration Rules`
+            )
+          }
         />
       </div>
     </div>

@@ -69,14 +69,14 @@ createRoot(document.getElementById("root")!).render(
             <Route path="meeting-summary" element={<TraineeMeetingSummary />} />
             <Route
               path="meeting-summary/:meetingId"
-              element={<TraineeMeetingSummaryDetail />}
+              element={<TraineeMeetingEvaluation />}
             />
 
             <Route path="start-meeting" element={<TraineeStartMeeting />} />
-            <Route
+            {/* <Route
               path="start-meeting/:meetingId"
               element={<TraineeMeetingEvaluation />}
-            />
+            /> */}
 
             <Route path="feedback" element={<TraineeFeedback />} />
           </Route>
