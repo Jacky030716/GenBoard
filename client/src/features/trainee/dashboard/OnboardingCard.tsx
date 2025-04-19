@@ -75,19 +75,17 @@ export const OnboardingCard = ({
           <h3 className="text-xl font-semibold text-gray-800 mb-2">Timeline</h3>
           <div className="flex flex-col gap-2 text-sm text-gray-600">
             <p>
-              <strong>Month 1:</strong> Complete onboarding basics and schedule
-              your first meeting.
+              <strong>Month 1:</strong> Read onboarding documents, install VS Code, Node.js, React, and learn React.
             </p>
             <p>
-              <strong>Month 2:</strong> Work on quizzes and participate in the
-              code exam.
+              <strong>Month 2:</strong> Learn Git basics, read technical & architecture docs, and complete the a small task.
             </p>
             <p>
-              <strong>Month 3:</strong> Finalize your onboarding with an
-              evaluation and feedback session.
+              <strong>Month 3:</strong> Follow the sprint flow and complete a real use case project.
             </p>
           </div>
         </div>
+
       </CardContent>
       <CardFooter>
         <Button
