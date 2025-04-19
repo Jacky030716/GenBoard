@@ -13,7 +13,7 @@ export const Chatbot = () => {
   const [client, setClient] = useState<WebchatClient | null>(null);
   const [isWebchatOpen, setIsWebchatOpen] = useState(false);
 
-  const clientId = "0d501df1-4bbb-4536-a788-75bf5f735dec";
+  const clientId = "db415cb0-9e5b-43de-bc33-09e6b65736a3";
 
   // https://cdn.botpress.cloud/webchat/v2.3/shareable.html?configUrl=https://files.bpcontent.cloud/2025/04/18/14/20250418144158-EGDKN64M.json
 

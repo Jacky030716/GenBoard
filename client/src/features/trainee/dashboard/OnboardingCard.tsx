@@ -22,7 +22,7 @@ export const OnboardingCard = ({
   );
 
   return (
-    <Card className="shadow-lg border border-gray-200 font-montserrat h-full flex flex-col justify-between">
+    <Card className="shadow-lg border border-gray-200 font-montserrat h-full flex flex-col justify-between rounded-t-2xl">
       <CardHeader className="bg-gradient-to-r from-indigo-500 to-sky-600 text-white p-6 rounded-t-2xl">
         <CardTitle className="text-2xl flex flex-col">
           <span>Welcome to GenBoard Onboarding Program</span>

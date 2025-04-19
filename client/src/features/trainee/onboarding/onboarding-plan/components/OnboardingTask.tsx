@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
 import { NavLink } from "react-router";
+import { useState, useEffect } from "react";
 
 interface OnboardingTaskProps {
   title: string;
@@ -31,9 +32,29 @@ export const OnboardingTask = ({
   currentPlan,
   isActive = false,
 }: OnboardingTaskProps) => {
+  const [open, setOpen] = useState<string | undefined>(undefined);
+
+  // Check if any subtask is active
+  const isAnySubtaskActive = subTasks.some(
+    (subTask) => currentPath === `${subTask.index}_${subTask.title}`
+  );
+
+  // Update open state when isAnySubtaskActive changes
+  useEffect(() => {
+    if (isAnySubtaskActive) {
+      setOpen(id);
+    }
+  }, [isAnySubtaskActive, id, currentPath]);
+
   if (hasSubtasks) {
     return (
-      <Accordion type="single" collapsible className="w-full">
+      <Accordion
+        type="single"
+        collapsible
+        className="w-full"
+        value={open}
+        onValueChange={setOpen}
+      >
         <AccordionItem value={id} className="w-full border-none">
           <AccordionTrigger className="py-0">
             <div className="flex items-center justify-between w-full text-left font-medium text-black px-2 text-wrap">
@@ -51,7 +72,7 @@ export const OnboardingTask = ({
                     key={subTask.index}
                     to={`/trainee/onboarding/plan/${currentPlan}/${subTask.index}_${subTask.title}`}
                     className={cn(
-                      "w-full text-left font-medium text-black  text-wrap",
+                      "w-full text-left font-medium text-black text-wrap",
                       isSubtaskActive
                         ? "bg-slate-600 rounded-md p-2 text-white"
                         : "hover:bg-slate-500 rounded-md p-2 hover:text-white"

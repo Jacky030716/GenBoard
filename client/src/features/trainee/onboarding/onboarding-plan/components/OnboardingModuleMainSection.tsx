@@ -150,8 +150,12 @@ export const OnboardingModuleMainSection = ({
         }
 
         await updateProgress({
-          currentIndex: currentSubtask?.index || currentTask?.index,
-          newIndex: nextPath.split("_")[0],
+          currentIndex: currentSubtask
+            ? `${currentSubtask.index}_${currentSubtask.title}`
+            : currentTask
+            ? `${currentTask.index}_${currentTask.title}`
+            : "unknown",
+          newIndex: nextPath,
         });
 
         // Navigate to next page
@@ -160,12 +164,38 @@ export const OnboardingModuleMainSection = ({
         console.error("Failed to submit quiz:", error);
       }
     } else {
+      // Determine the next index for special cases
+      let customNextIndex = nextPath;
+
+      if (currentSubtask?.index === "1.7.7") {
+        customNextIndex = "2.1_View Technical & Architecture Docs";
+      } else if (currentSubtask?.index === "2.3.7") {
+        customNextIndex = "3.1_View Sprint Flow & Team Collaboration Rules";
+      }
+
       await updateProgress({
-        currentIndex: currentSubtask?.index || currentTask?.index,
-        newIndex: nextPath.split("_")[0],
+        currentIndex: currentSubtask
+          ? `${currentSubtask.index}_${currentSubtask.title}`
+          : currentTask
+          ? `${currentTask.index}_${currentTask.title}`
+          : "unknown",
+        newIndex: customNextIndex,
       });
 
-      navigate(`/trainee/onboarding/plan/${currentPlan}/${nextPath}`);
+      // Navigate to the appropriate page
+      if (currentSubtask?.index === "1.7.7") {
+        navigate(
+          `/trainee/onboarding/plan/month2/2.1_View Technical & Architecture Docs`
+        );
+        return;
+      } else if (currentSubtask?.index === "2.3.7") {
+        navigate(
+          `/trainee/onboarding/plan/month3/3.1_View Sprint Flow & Team Collaboration Rules`
+        );
+        return;
+      } else {
+        navigate(`/trainee/onboarding/plan/${currentPlan}/${nextPath}`);
+      }
     }
   };
 

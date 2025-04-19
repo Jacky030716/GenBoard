@@ -4,11 +4,10 @@ interface OnboardingPlanProps {
   month: number;
   title: string;
   description: string;
-  status?: string;
   availableDate: string;
   onButtonClick?: () => void;
-  buttonText?: string;
   isCompleted?: boolean;
+  isDisabled?: boolean;
   bg?: string;
   moduleImg?: string;
 }
@@ -17,11 +16,10 @@ export const OnboardingPlan = ({
   month,
   title,
   description,
-  status,
   availableDate,
   onButtonClick,
-  buttonText,
   isCompleted,
+  isDisabled,
   bg,
   moduleImg,
 }: OnboardingPlanProps) => {
@@ -58,6 +56,7 @@ export const OnboardingPlan = ({
       <div className="p-6">
         <Button
           variant="ghost"
+          disabled={isDisabled}
           onClick={onButtonClick}
           className={`w-full py-2 h-12 rounded-full font-bold font-poppins ${
             isCompleted ? "bg-[#CFD47E] text-black" : "bg-indigo-200 text-black"
