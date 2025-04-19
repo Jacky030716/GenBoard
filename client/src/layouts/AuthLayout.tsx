@@ -4,7 +4,7 @@ import { Outlet } from "react-router";
 
 const AuthLayout = () => {
   return (
-    <div className="bg-background min-h-screen w-full">
+    <div className="genbot-bg min-h-screen w-full">
       <div className="h-full flex items-center justify-center">
         <div className="flex-1 h-screen flex flex-col gap-8 justify-center items-center text-white">
           <div className="w-[400px]  animate-float relative flex flex-col items-center justify-center">
@@ -12,8 +12,20 @@ const AuthLayout = () => {
             <div className="absolute bottom-0 w-[250px] h-[15px] rounded-full bg-white opacity-30 blur-lg shadow-xl z-[-1]"></div>
           </div>
           <div className="space-y-2 text-center font-poppins">
-            <h1 className="text-5xl font-semibold">Welcome to GenBoard</h1>
-            <p className="text-lg">
+            <h1
+              className="text-5xl font-semibold"
+              style={{
+                textShadow: "0 0 10px rgba(0, 0, 0, 0.3)",
+              }}
+            >
+              Welcome to GenBoard
+            </h1>
+            <p
+              className="text-lg"
+              style={{
+                textShadow: "0 0 10px rgba(0, 0, 0, 0.3)",
+              }}
+            >
               Let GenBot makes onboarding{" "}
               <FlipWords
                 words={["simple", "smart", "fun"]}

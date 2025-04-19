@@ -69,11 +69,11 @@ export const SignInForm = () => {
           className="w-full rounded-full h-12 bg-[#80748E] hover:bg-[#80748E]/90 text-white font-semibold"
           asChild
         >
-          <NavLink to="/forgot-password"> Forgot Password?</NavLink>
+          <NavLink to="/"> Forgot Password?</NavLink>
         </Button>
         <p className="text-secondary-placeholder text-sm">
           Don't have an account?{" "}
-          <NavLink to="/sign-up">
+          <NavLink to="/">
             <span className="text-blue-500 hover:text-blue-600 transition-colors font-semibold">
               Register Now
             </span>
