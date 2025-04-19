@@ -53,8 +53,6 @@ export const MeetingSearch = () => {
 
     saveMeetingAiEvaluation(url, {
       onSuccess: (data) => {
-        console.log("Meeting AI Evaluation saved successfully", data);
-
         form.reset();
         setIsLoading(false);
         navigate(`/trainee/meeting-summary/${data?.meetingId}`);

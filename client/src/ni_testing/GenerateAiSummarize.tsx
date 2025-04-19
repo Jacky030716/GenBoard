@@ -76,7 +76,6 @@ const GenerateAiSummarize = ({ videoLink }: { videoLink: string }) => {
 
           const summary = JSON.parse(raw);
           setSummary(JSON.stringify(summary, null, 2));
-          console.log("Summary:", summary);
         }
       } catch (error) {
         console.error("Error during transcription/summarization:", error);

@@ -33,6 +33,7 @@ import { Input } from "@/components/ui/input";
 import { meetingFormSchema } from "@/lib/schema";
 import { timeSlots } from "@/constants";
 import { useCreateMeeting } from "../hooks/use-create-meeting";
+import { toast } from "sonner";
 
 export type MeetingFormValues = z.infer<typeof meetingFormSchema>;
 
@@ -72,9 +73,10 @@ export const MeetingScheduler = ({ trainees }: MeetingSchedulerProps) => {
       },
       {
         onSuccess: () => {
-          console.log("Meeting created successfully");
+          toast.success("Meeting created successfully");
         },
         onError: (error) => {
+          toast.error("Error creating meeting. Please try again later.");
           console.error("Error creating meeting:", error);
         },
       }
