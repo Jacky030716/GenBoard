@@ -18,8 +18,6 @@ export const MeetingSummaryList = ({
   meetingSummaries,
   isLoading,
 }: MeetingSummaryListProps) => {
-  console.log("Meeting Summaries:", meetingSummaries);
-
   return (
     <table className="w-full font-poppins">
       <thead>

@@ -13,8 +13,6 @@ interface CreateMeetingPayload {
 export const useCreateMeeting = () => {
   const mutation = useMutation({
     mutationFn: async (data: CreateMeetingPayload) => {
-      console.log("Creating meeting with data:", data);
-
       const response = await httpClient.post("/meeting", {
         ...data,
       });

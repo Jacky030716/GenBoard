@@ -51,8 +51,6 @@ export const useAiEvaluateResult = () => {
 
         const evaluation = JSON.parse(raw);
 
-        console.log("AI Evaluation Result:", evaluation);
-
         const dbResponse = await httpClient.post("/aiEvaluationReport", {
           weakness: evaluation["weakness"],
           strength: evaluation["strength"],
@@ -62,8 +60,6 @@ export const useAiEvaluateResult = () => {
         if (dbResponse.status === 400) {
           throw new Error("AI evaluation failed. Please try again later.");
         }
-
-        console.log("Database Response:", dbResponse.data);
 
         return dbResponse.data;
       } catch (error) {

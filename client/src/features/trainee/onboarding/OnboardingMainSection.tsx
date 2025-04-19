@@ -55,6 +55,14 @@ export const OnboardingMainSection = () => {
     }
   };
 
+  if (isResultLoading) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <p className="text-lg font-semibold">Loading...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="p-12 flex flex-col gap-8">
       <OnboardingHeader />

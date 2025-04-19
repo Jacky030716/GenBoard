@@ -8,13 +8,9 @@ export const useGetMeetingAiEvaluation = (meetingId: string) => {
     queryFn: async () => {
       const response = await httpClient.get(`/aiSummarizeReport/${meetingId}`);
 
-      console.log("Meeting Evaluation Response:", response.data);
-
       if (response.status !== 200) {
         throw new Error("No summarize report found!");
       }
-
-      console.log("Meeting Evaluation Response:", response.data);
 
       const result = response.data;
 
