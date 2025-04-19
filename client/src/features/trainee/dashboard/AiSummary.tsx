@@ -29,7 +29,7 @@ export const AiSummary = () => {
 
   if (isLoading || getEvaluationLoading) {
     return (
-      <div className="md:col-span-3 h-full bg-white rounded-2xl overflow-hidden shadow-md font-montserrat p-6 flex flex-col gap-6">
+      <div className="xl:col-span-3 h-full bg-white rounded-2xl overflow-hidden shadow-md font-montserrat p-6 flex flex-col gap-6">
         <div className="flex items-center justify-center h-full">
           Loading...
         </div>
@@ -38,7 +38,7 @@ export const AiSummary = () => {
   }
 
   return (
-    <div className="md:col-span-3 h-full bg-white rounded-2xl overflow-hidden shadow-md font-montserrat p-6 flex flex-col gap-6">
+    <div className="xl:col-span-3 h-full bg-white rounded-2xl overflow-hidden shadow-md font-montserrat p-6 flex flex-col gap-6">
       {/* Header */}
       <div className="h-full w-full flex flex-col gap-6 font-montserrat text-black">
         <h2 className="text-xl w-full font-semibold text-center flex items-center gap-2">
@@ -62,8 +62,8 @@ export const AiSummary = () => {
                   Evaluate Performance
                 </Button>
                 <span className="text-xs text-muted-foreground">
-                  Remark: You must complete all tasks in Month 1 to get an
-                  evaluation
+                  Remark: You must complete at least all tasks in Month 1 to get
+                  an evaluation
                 </span>
               </div>
             </div>

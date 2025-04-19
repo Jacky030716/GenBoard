@@ -38,12 +38,12 @@ export const TraineeSidebar = () => {
               <NavLink
                 to={link.path}
                 className={cn(
-                  "text-lg",
+                  "text-base",
                   link.path === pathname ? "text-[#4C1F80]" : "text-gray-600"
                 )}
               >
                 {link.path === pathname && (
-                  <div className="bg-[#BFBCE9] w-[302px] h-14 rounded-full drop-shadow-lg shadow-md absolute -top-1/2 -left-14 z-0" />
+                  <div className="bg-[#BFBCE9] w-[262px] h-12 rounded-full drop-shadow-lg shadow-md absolute -top-1/2 -left-14 z-0" />
                 )}
                 <div className="flex items-center gap-2 relative z-10">
                   {link.icon && link.icon}
@@ -57,7 +57,7 @@ export const TraineeSidebar = () => {
         {/* Logout */}
         <Button
           variant="ghost"
-          className="flex justify-start rounded-full text-destructive text-lg hover:text-rose-500 hover:bg-transparent w-fit gap-2 h-10 px-4"
+          className="flex justify-start rounded-full text-destructive text-base hover:text-rose-500 hover:bg-transparent w-fit gap-2 h-10 px-4"
           onClick={handleLogout}
         >
           <LogOut />

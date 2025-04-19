@@ -21,8 +21,8 @@ export const Profile = () => {
     <div className="flex flex-col gap-4 items-center p-8">
       <img src={Avatar} alt="Avatar" className="size-[85px] rounded-full" />
       <div className="text-center font-montserrat">
-        <h2 className="font-bold text-3xl">{name}</h2>
-        <p className="text-muted-foreground">
+        <h2 className="font-bold text-2xl">{name}</h2>
+        <p className="text-muted-foreground text-sm">
           GenBoard <span className="capitalize">{role}</span>
         </p>
 

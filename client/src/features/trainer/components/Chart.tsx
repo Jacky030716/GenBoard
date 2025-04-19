@@ -27,7 +27,7 @@ const renderCustomLegend = (props: any) => {
           className="flex items-center gap-2 text-base font-medium"
         >
           <span
-            className="w-6 h-6 rounded-full"
+            className="w-4 h-4 rounded-full"
             style={{ backgroundColor: entry.color }}
           ></span>
           <span className="text-gray-800 text-lg">{entry.value}</span>

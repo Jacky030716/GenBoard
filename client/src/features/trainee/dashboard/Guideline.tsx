@@ -6,7 +6,7 @@ interface GuidelineProps {
 
 export const Guideline = ({ currentCompletedTask }: GuidelineProps) => {
   return (
-    <div className="md:col-span-3 md:row-span-2">
+    <div className="xl:col-span-3 xl:row-span-2">
       <OnboardingCard currentCompletedTask={currentCompletedTask} />
     </div>
   );

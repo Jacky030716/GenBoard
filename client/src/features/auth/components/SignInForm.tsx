@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { NavLink, useNavigate } from "react-router";
 import { useLoginUser } from "../hooks/use-login-user";
-import { GraduationCap, IdCard } from "lucide-react";
+import { AuthCard } from "./AuthCard";
+import { TraineeBot, TrainerBot } from "@/assets";
 
 // type formSchema = z.infer<typeof signInSchema>;
 
@@ -24,13 +25,24 @@ export const SignInForm = () => {
   };
 
   return (
-    <div className="flex flex-col gap-8 justify-center w-1/2">
+    <div className="h-full w-full flex flex-col gap-8 justify-center p-16 font-poppins bg-gradient-to-tr from-purple-100 to-rose-50">
       <h2 className="text-[#301B52] text-2xl text-center font-semibold">
-        Log In
+        Choose Your Role
       </h2>
 
-      <div className="flex flex-col gap-4">
-        <Button
+      <div className="grid xl:grid-cols-2 grid-cols-1 gap-4">
+        <AuthCard
+          role="Trainee"
+          img={TraineeBot}
+          onClick={() => handleLogin("trainee")}
+        />
+        <AuthCard
+          role="Trainer"
+          img={TrainerBot}
+          onClick={() => handleLogin("trainer")}
+        />
+
+        {/* <Button
           onClick={() => handleLogin("trainer")}
           className="w-full rounded-full h-12 bg-[#252526] mt-4"
         >
@@ -48,58 +60,8 @@ export const SignInForm = () => {
             <GraduationCap size={24} />
             <p>Sign In as Trainee</p>
           </div>
-        </Button>
+        </Button> */}
       </div>
-
-      {/* <Form {...form}>
-        <form
-          className="flex flex-col gap-4"
-          onSubmit={form.handleSubmit(onSubmit)}
-        >
-          <FormField
-            name="email"
-            control={form.control}
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input
-                    placeholder="Email"
-                    type="email"
-                    {...field}
-                    className="bg-[#F6F6F6] border border-[#828282] rounded-2xl focus:border-[#828282] focus:ring-0 h-14 px-6"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            name="password"
-            control={form.control}
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input
-                    placeholder="Password"
-                    type="password"
-                    {...field}
-                    className="bg-[#F6F6F6] border border-[#828282] rounded-2xl focus:border-[#828282] focus:ring-0 h-14 px-6"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <Button
-            type="submit"
-            className="w-full rounded-full h-12 bg-[#252526] mt-4"
-          >
-            Log In
-          </Button>
-        </form>
-      </Form> */}
 
       <div className="flex flex-col items-center gap-2 mt-8">
         <Button

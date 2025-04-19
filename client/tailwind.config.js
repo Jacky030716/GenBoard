@@ -78,6 +78,29 @@ export default {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-20px)" },
         },
+
+        levitate: {
+          "0%": {
+            transform: "translateY(0) rotate(0deg)",
+            boxShadow: "0 5px 15px 0px rgba(0,0,0,0.2)",
+          },
+          "25%": {
+            transform: "translateY(-10px) rotate(2deg)",
+            boxShadow: "0 15px 25px 0px rgba(0,0,0,0.3)",
+          },
+          "50%": {
+            transform: "translateY(-20px) rotate(0deg)",
+            boxShadow: "0 25px 35px 0px rgba(0,0,0,0.4)",
+          },
+          "75%": {
+            transform: "translateY(-10px) rotate(-2deg)",
+            boxShadow: "0 15px 25px 0px rgba(0,0,0,0.3)",
+          },
+          "100%": {
+            transform: "translateY(0) rotate(0deg)",
+            boxShadow: "0 5px 15px 0px rgba(0,0,0,0.2)",
+          },
+        },
         "accordion-down": {
           from: {
             height: "0",
@@ -99,6 +122,7 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         float: "float 3s ease-in-out infinite",
+        levitate: "levitate 3s ease-in-out infinite",
       },
     },
   },

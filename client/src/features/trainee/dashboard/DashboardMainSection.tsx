@@ -30,7 +30,7 @@ export const DashboardMainSection = () => {
       />
 
       {/* Grid */}
-      <div className="w-full grid md:grid-cols-6 grid-cols-1 auto-rows-auto gap-6">
+      <div className="w-full grid xl:grid-cols-6 grid-cols-1 auto-rows-auto gap-6">
         <Guideline currentCompletedTask={traineeProgress?.result?.length} />
         <CallMeeting />
         {/* <MeetingSchedule meetings={meetings} /> */}

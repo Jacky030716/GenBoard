@@ -5,7 +5,7 @@ const TraineeSchedule = () => {
   return (
     <div className="flex h-full">
       {/* Sidebar */}
-      <div className="w-[300px] flex-shrink-0">
+      <div className="w-[260px] flex-shrink-0">
         <TraineeSidebar />
       </div>
 

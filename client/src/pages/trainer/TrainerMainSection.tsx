@@ -42,7 +42,7 @@ export default function TrainerMainSection() {
     <div className="p-12">
       <h1 className="text-2xl font-bold mb-6 font-montserrat">My Dashboard</h1>
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+      <div className="grid grid-cols-1 2xl:grid-cols-2 gap-6 mb-6">
         {/* Trainee statistics card */}
         <Chart />
 

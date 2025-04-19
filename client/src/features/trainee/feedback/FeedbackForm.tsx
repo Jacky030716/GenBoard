@@ -82,7 +82,7 @@ export const FeedbackForm = ({ email, name, uid }: FeedbackFormProps) => {
           className="w-full flex flex-col items-center gap-24"
           onSubmit={form.handleSubmit(onSubmit)}
         >
-          <div className="w-full flex gap-12">
+          <div className="w-full flex max-lg:flex-col gap-12">
             <div className="w-full flex-1 flex flex-col gap-8">
               {/* Name input */}
               <div className="flex items-center justify-between gap-12">

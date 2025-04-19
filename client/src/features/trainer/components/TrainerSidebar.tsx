@@ -30,7 +30,7 @@ export const TrainerSidebar = () => {
               key={link.name}
               to={link.path}
               className={cn(
-                "text-lg",
+                "text-base",
                 link.path === pathname ? "text-[#4C1F80]" : "text-gray-600"
               )}
             >
@@ -45,7 +45,7 @@ export const TrainerSidebar = () => {
         {/* Logout */}
         <Button
           variant="ghost"
-          className="flex justify-start rounded-full text-destructive text-lg hover:text-rose-500 hover:bg-transparent w-fit gap-2 h-10 px-4"
+          className="flex justify-start rounded-full text-destructive text-base hover:text-rose-500 hover:bg-transparent w-fit gap-2 h-10 px-4"
           onClick={handleLogout}
         >
           <LogOut />

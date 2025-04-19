@@ -18,12 +18,17 @@ import TraineeIllustration from "./trainee_illu.png";
 import Avatar from "./avatar.png";
 
 import Genbot from "./genbot.png";
+import BigRobot from "./Robot.png";
+import GenbotBg from "./genboard_bg.png";
+
+import TrainerBot from "./trainer_bot.png";
+import TraineeBot from "./trainee_bot.png";
 
 export { AuthLogo, HeaderLogo };
 
 export { Trainee, Trainer, TrainerIllustration, TraineeIllustration, Avatar };
 
-export { Genbot };
+export { Genbot, BigRobot, GenbotBg, TraineeBot, TrainerBot };
 
 export {
   OnboardingBackground1,

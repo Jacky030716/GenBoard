@@ -22,7 +22,7 @@ export const OnboardingMainSection = () => {
   const currentTask = traineeProgress?.currentIndex;
 
   const isCompleted = (lastTask: string) => {
-    const isExist = traineeProgress.result.some((task: any) => {
+    const isExist = traineeProgress?.result?.some((task: any) => {
       return task.index.startsWith(lastTask) && task.isCompleted;
     });
 
@@ -89,7 +89,7 @@ export const OnboardingMainSection = () => {
           bg={OnboardingBackground2}
           moduleImg={Module2}
           isCompleted={isCompleted("2.3.7")}
-          isDisabled={!traineeProgress.currentIndex.startsWith("2")}
+          isDisabled={!traineeProgress?.currentIndex?.startsWith("2")}
           onButtonClick={() => handleCourseAction("month2")}
         />
         <OnboardingPlan
@@ -100,7 +100,7 @@ export const OnboardingMainSection = () => {
           bg={OnboardingBackground3}
           moduleImg={Module3}
           isCompleted={isCompleted("3.2.6")}
-          isDisabled={!traineeProgress.currentIndex.startsWith("3")}
+          isDisabled={!traineeProgress?.currentIndex?.startsWith("3")}
           onButtonClick={() => handleCourseAction("month3")}
         />
       </div>

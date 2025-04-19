@@ -4,7 +4,7 @@ import { AudioLines } from "lucide-react";
 
 export const CallMeeting = () => {
   return (
-    <div className="md:col-span-3 w-full h-full bg-white rounded-2xl overflow-hidden shadow-md font-montserrat  flex flex-col justify-between gap-6 p-6">
+    <div className="xl:col-span-3 w-full h-full bg-white rounded-2xl overflow-hidden shadow-md font-montserrat  flex flex-col justify-between gap-6 p-6">
       <div className="space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between font-montserrat">

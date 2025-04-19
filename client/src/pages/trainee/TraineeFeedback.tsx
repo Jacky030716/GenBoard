@@ -5,12 +5,12 @@ const TraineeFeedback = () => {
   return (
     <div className="flex h-full">
       {/* Sidebar */}
-      <div className="w-[300px] flex-shrink-0">
+      <div className="w-[260px] flex-shrink-0">
         <TraineeSidebar />
       </div>
 
       {/* Main Content */}
-      <main className="bg-[#FFF7F7] flex-1">
+      <main className="bg-[#FFF7F7] flex-1 overflow-y-auto">
         <FeedbackMainSection />
       </main>
     </div>

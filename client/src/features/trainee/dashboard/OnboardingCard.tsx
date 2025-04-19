@@ -17,9 +17,8 @@ interface OnboardingCardProps {
 export const OnboardingCard = ({
   currentCompletedTask,
 }: OnboardingCardProps) => {
-  const progressPercentage = Math.round(
-    (currentCompletedTask / TASKS_NUMBER) * 100
-  );
+  const progressPercentage =
+    Math.round((currentCompletedTask / TASKS_NUMBER) * 100) || 0;
 
   return (
     <Card className="shadow-lg border border-gray-200 font-montserrat h-full flex flex-col justify-between rounded-t-2xl">
@@ -75,17 +74,19 @@ export const OnboardingCard = ({
           <h3 className="text-xl font-semibold text-gray-800 mb-2">Timeline</h3>
           <div className="flex flex-col gap-2 text-sm text-gray-600">
             <p>
-              <strong>Month 1:</strong> Read onboarding documents, install VS Code, Node.js, React, and learn React.
+              <strong>Month 1:</strong> Read onboarding documents, install VS
+              Code, Node.js, React, and learn React.
             </p>
             <p>
-              <strong>Month 2:</strong> Learn Git basics, read technical & architecture docs, and complete the a small task.
+              <strong>Month 2:</strong> Learn Git basics, read technical &
+              architecture docs, and complete the a small task.
             </p>
             <p>
-              <strong>Month 3:</strong> Follow the sprint flow and complete a real use case project.
+              <strong>Month 3:</strong> Follow the sprint flow and complete a
+              real use case project.
             </p>
           </div>
         </div>
-
       </CardContent>
       <CardFooter>
         <Button
