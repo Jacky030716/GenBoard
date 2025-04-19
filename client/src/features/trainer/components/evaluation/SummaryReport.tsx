@@ -34,10 +34,10 @@ export const SummaryReport: React.FC<SummaryReportProps> = ({
             </h2>
 
             {/* Strengths section */}
-            <div className="mb-4">
+            <div className="mb-4 bg-sky-50 p-6 rounded-lg">
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-3 h-3 bg-blue-500 rotate-45"></div>
-                <h3 className="font-bold text-lg">Strengths:</h3>
+                <h3 className="font-bold text-lg text-blue-500">Strengths:</h3>
               </div>
               {/* If strengths is an array */}
               <ul className="list-disc ml-6 space-y-1">
@@ -52,10 +52,12 @@ export const SummaryReport: React.FC<SummaryReportProps> = ({
             </div>
 
             {/* Weaknesses section */}
-            <div>
+            <div className="bg-yellow-50 p-6 rounded-lg">
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-3 h-3 bg-amber-400 rotate-45"></div>
-                <h3 className="font-bold text-lg">Weaknesses:</h3>
+                <h3 className="font-bold text-lg text-amber-500">
+                  Weaknesses:
+                </h3>
               </div>
               {/* If weaknesses is an array */}
               <ul className="list-disc ml-6 space-y-1">
@@ -72,7 +74,7 @@ export const SummaryReport: React.FC<SummaryReportProps> = ({
         </div>
 
         {/* Disclaimer section */}
-        <div className="md:w-64 w-full bg-red-700 text-white p-5 rounded-lg">
+        <div className="bg-red-700 text-white p-5 rounded-lg">
           <div className="flex items-center gap-2 mb-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -5,25 +5,34 @@ import { Button } from "@/components/ui/button";
 import { Chart } from "../../features/trainer/components/Chart";
 import { MeetingCalendar } from "../../features/trainer/components/MeetingCalendar";
 import { useGetMeetings } from "@/features/trainer/hooks/use-get-meetings";
+import { AIEvaluationSearch } from "@/features/trainer/components/AiEvaluationSearch";
+import { useGetTrainees } from "@/features/trainer/hooks/trainee/use-get-trainees";
+import { useNavigate } from "react-router";
 
 export default function TrainerMainSection() {
+  const navigate = useNavigate();
+
   const uid = localStorage.getItem("uid") as string;
+  const department = localStorage.getItem("department") as string;
 
   const meetingsQuery = useGetMeetings(uid);
   const meetings = meetingsQuery.data;
 
-  const [searchEmail, setSearchEmail] = useState("");
+  const traineesQuery = useGetTrainees(department);
+  const trainees = traineesQuery?.data?.map((trainee: any) => ({
+    name: trainee.name,
+    uid: trainee.uid,
+  }));
 
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth();
   const currentYear = currentDate.getFullYear();
 
-  const handleSearch = () => {
-    console.log("Searching for:", searchEmail);
-    // Implement actual search functionality here
+  const handleSearch = (uid: string) => {
+    navigate(`/trainer/evaluation/${uid}`);
   };
 
-  const isLoading = meetingsQuery.isLoading;
+  const isLoading = meetingsQuery.isLoading || traineesQuery.isLoading;
 
   if (isLoading) {
     return (
@@ -57,28 +66,10 @@ export default function TrainerMainSection() {
       </div>
 
       {/* AI Evaluation Report card */}
-      <div className="bg-white rounded-lg p-6 shadow-sm">
-        <h2 className="text-lg font-semibold mb-4">AI Evaluation Report</h2>
-        <p className="text-sm text-gray-600 mb-4">Search your Trainee</p>
-
-        <div className="flex flex-col md:flex-row gap-4">
-          <div className="flex-grow">
-            <Input
-              type="email"
-              placeholder="Email"
-              value={searchEmail}
-              onChange={(e) => setSearchEmail(e.target.value)}
-              className="w-full border-b border-gray-300 bg-gray-50 focus:outline-none px-3 py-2"
-            />
-          </div>
-          <Button
-            onClick={handleSearch}
-            className="bg-[#8C1C1C] hover:bg-[#6d1616] text-white px-6 py-2 rounded"
-          >
-            Search
-          </Button>
-        </div>
-      </div>
+      <AIEvaluationSearch
+        onSearch={(name: string) => handleSearch(name)}
+        trainees={trainees}
+      />
     </div>
   );
 }

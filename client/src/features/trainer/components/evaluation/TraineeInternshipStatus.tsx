@@ -7,28 +7,26 @@ interface TraineeInternshipStatusProps {
     startDate: string;
     completionDate: string;
     status: string;
-    totalMark: string;
   };
 }
 
 export const TraineeInternshipStatus = ({
   trainee,
 }: TraineeInternshipStatusProps) => {
-  const { name, startDate, completionDate, status, totalMark } = trainee;
+  const { name, startDate, completionDate, status } = trainee;
 
   const formatDate = (date: string) => {
     return format(new Date(date), "dd MMM yyyy");
   };
 
   return (
-    <table className="w-full">
+    <table className="w-full font-montserrat">
       <thead>
         <tr className="">
           <th className="text-[#B5B7C0] border-b pb-4">Name</th>
           <th className="text-[#B5B7C0] border-b pb-4">Start Date</th>
           <th className="text-[#B5B7C0] border-b pb-4">Completion Date</th>
           <th className="text-[#B5B7C0] border-b pb-4">Status</th>
-          <th className="text-[#B5B7C0] border-b pb-4">Total Mark</th>
         </tr>
       </thead>
       <tbody className="text-center font-semibold">
@@ -41,7 +39,6 @@ export const TraineeInternshipStatus = ({
               <span className="capitalize">{status}</span>
             </Badge>
           </td>
-          <td>{totalMark}%</td>
         </tr>
       </tbody>
     </table>

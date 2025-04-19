@@ -73,10 +73,6 @@ createRoot(document.getElementById("root")!).render(
             />
 
             <Route path="start-meeting" element={<TraineeStartMeeting />} />
-            {/* <Route
-              path="start-meeting/:meetingId"
-              element={<TraineeMeetingEvaluation />}
-            /> */}
 
             <Route path="feedback" element={<TraineeFeedback />} />
           </Route>

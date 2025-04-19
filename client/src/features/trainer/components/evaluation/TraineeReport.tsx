@@ -8,7 +8,6 @@ export interface Trainee {
   startDate: string;
   completionDate: string;
   status: string;
-  totalMark: string;
 }
 
 interface TraineeReportProps {
@@ -42,7 +41,6 @@ export const TraineeReport = ({
           startDate: trainee.startDate,
           completionDate: trainee.completionDate,
           status: trainee.status,
-          totalMark: trainee.totalMark,
         }}
       />
 
