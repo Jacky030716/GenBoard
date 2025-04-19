@@ -91,7 +91,7 @@ export const OnboardingMainSection = () => {
         initial="hidden"
         animate="show"
       >
-        {[1, 2, 3].map((month, index) => (
+        {[1, 2, 3].map((month) => (
           <motion.div key={month} variants={childVariants}>
             <OnboardingPlan
               month={month}
