@@ -1,6 +1,4 @@
 import { ForgotPasswordForm } from "@/features/auth/components/ForgotPassword";
-import { SignInForm } from "@/features/auth/components/SignInForm";
-import React from "react";
 
 const ForgotPasswordPage = () => {
   return (

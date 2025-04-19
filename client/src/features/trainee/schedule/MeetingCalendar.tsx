@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { format, isSameDay, isSameMonth, parseISO } from "date-fns";
+import { format, isSameDay, parseISO } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChevronLeft, ChevronRight, Info } from "lucide-react";
+import { Info } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,

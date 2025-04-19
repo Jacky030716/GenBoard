@@ -8,7 +8,6 @@ interface SummaryReportProps {
 }
 
 export const SummaryReport: React.FC<SummaryReportProps> = ({
-  profileImage,
   strengths,
   weaknesses,
   disclaimerDate,

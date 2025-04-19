@@ -1,43 +1,14 @@
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
-import { signInSchema } from "@/lib/schema";
 import { Button } from "@/components/ui/button";
 import { NavLink, useNavigate } from "react-router";
 import { useLoginUser } from "../hooks/use-login-user";
 import { GraduationCap, IdCard } from "lucide-react";
 
-type formSchema = z.infer<typeof signInSchema>;
+// type formSchema = z.infer<typeof signInSchema>;
 
 export const SignInForm = () => {
   const login = useLoginUser();
 
   const navigate = useNavigate();
-
-  const form = useForm({
-    resolver: zodResolver(signInSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
-
-  const onSubmit = (data: formSchema) => {
-    login.mutate(data, {
-      onSuccess: ({ role }) => {
-        navigate(`/${role}/dashboard`);
-      },
-    });
-  };
 
   const handleLogin = (role: "trainer" | "trainee") => {
     const credentials = {
@@ -64,7 +35,7 @@ export const SignInForm = () => {
           className="w-full rounded-full h-12 bg-[#252526] mt-4"
         >
           <div className="flex items-center justify-center gap-2">
-            <IdCard size={24}/>
+            <IdCard size={24} />
             Sign In as Trainer
           </div>
         </Button>
@@ -74,10 +45,9 @@ export const SignInForm = () => {
           className="w-full rounded-full h-12 bg-[#252526]"
         >
           <div className="flex items-center justify-center gap-2">
-            <GraduationCap size={24}/>
+            <GraduationCap size={24} />
             <p>Sign In as Trainee</p>
           </div>
-          
         </Button>
       </div>
 

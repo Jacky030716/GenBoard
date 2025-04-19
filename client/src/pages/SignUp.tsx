@@ -1,5 +1,4 @@
 import { RoleCard } from "@/features/auth/components/RoleCard";
-import React from "react";
 
 const SignUp = () => {
   return (

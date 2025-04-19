@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export const CircularProgressIndicator = ({ score }: { score: number }) => {
   const [progress, setProgress] = useState(0);

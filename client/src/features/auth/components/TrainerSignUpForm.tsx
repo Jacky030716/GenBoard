@@ -10,7 +10,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -71,7 +70,7 @@ export default function TrainerSignUpForm() {
     }
   };
 
-  const onSubmit = (values: TrainerFormValues) => {
+  const onSubmit = () => {
     setIsSubmitting(true);
     try {
       // Here you would typically make an API call to create the account

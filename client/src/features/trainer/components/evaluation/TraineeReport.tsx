@@ -1,5 +1,3 @@
-import { useGetOnboardingStatus } from "@/features/trainee/onboarding/hooks/useGetOnboardingStatus";
-import { useGetEvaluation } from "./hooks/use-get-evaluation";
 import { SummaryReport } from "./SummaryReport";
 import { TraineeInternshipStatus } from "./TraineeInternshipStatus";
 

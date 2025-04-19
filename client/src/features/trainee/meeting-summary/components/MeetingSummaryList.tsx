@@ -16,7 +16,6 @@ interface MeetingSummaryListProps {
 
 export const MeetingSummaryList = ({
   meetingSummaries,
-  isLoading,
 }: MeetingSummaryListProps) => {
   return (
     <table className="w-full font-poppins">

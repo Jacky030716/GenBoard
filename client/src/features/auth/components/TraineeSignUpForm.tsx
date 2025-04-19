@@ -10,7 +10,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -71,7 +70,7 @@ export default function TraineeSignUpForm() {
     }
   };
 
-  const onSubmit = (values: TrainerFormValues) => {
+  const onSubmit = () => {
     setIsSubmitting(true);
     try {
       navigate(`/trainer/dashboard`);

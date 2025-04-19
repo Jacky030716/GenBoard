@@ -1,7 +1,4 @@
-import {
-  MeetingFormValues,
-  MeetingScheduler,
-} from "@/features/trainer/components/MeetingScheduler";
+import { MeetingScheduler } from "@/features/trainer/components/MeetingScheduler";
 import { Header } from "@/features/trainer/components/Header";
 import { useCreateMeeting } from "@/features/trainer/hooks/use-create-meeting";
 import { useGetTrainees } from "@/features/trainer/hooks/trainee/use-get-trainees";

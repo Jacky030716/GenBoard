@@ -25,7 +25,6 @@ import { Chatbot } from "./features/chatbot/chatbot.tsx";
 import TraineeGrade from "./pages/trainee/TraineeGrade.tsx";
 import TraineeOnboardingModule from "./pages/trainee/TraineeOnboardingModule.tsx";
 import TraineeMeetingSummary from "./pages/trainee/TraineeMeetingSummary.tsx";
-import TraineeMeetingSummaryDetail from "./pages/trainee/TraineeMeetingSummaryDetail.tsx";
 
 import Test from "./ni_testing/Test.tsx";
 import TraineeStartMeeting from "./pages/trainee/TraineeStartMeeting.tsx";

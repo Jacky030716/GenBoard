@@ -1,4 +1,4 @@
-import { NavLink, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { OnboardingRenderer } from "./OnboardingRenderer";
 import { useGetResult } from "../hooks/use-get-result";
 import {

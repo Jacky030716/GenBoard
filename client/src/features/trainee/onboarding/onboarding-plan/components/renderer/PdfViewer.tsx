@@ -19,7 +19,7 @@ export const PdfViewer = ({
     <div className="mx-auto w-full flex flex-col items-center gap-8">
       <div className="w-full flex justify-center">
         <Document file={`/${path}`} onLoadSuccess={onDocumentLoadSuccess}>
-          {Array.from(new Array(numPages), (el, index) => (
+          {Array.from(new Array(numPages), (_, index) => (
             <Page
               key={`page_${index + 1}`}
               pageNumber={index + 1}
