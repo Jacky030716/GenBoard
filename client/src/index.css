@@ -46,6 +46,35 @@ body {
   opacity: 0.5; /* Adjust opacity here (0.0 to 1.0) */
   z-index: -1; /* Ensure it stays behind other content */
 }
+
+/* Animate the dots */
+.loading-dots {
+  display: inline-block;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+}
+
+.loading-dots::after {
+  content: "";
+  display: inline-block;
+  animation: dots 1.5s steps(3, end) infinite;
+}
+
+@keyframes dots {
+  0% {
+    content: ".";
+  }
+  33% {
+    content: "..";
+  }
+  66% {
+    content: "...";
+  }
+  100% {
+    content: "";
+  }
+}
+
 .onboarding-shadow {
   box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.5);
 }

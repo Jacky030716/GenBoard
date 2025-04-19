@@ -1,3 +1,5 @@
+import { motion } from "motion/react";
+
 import { useState } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -47,7 +49,12 @@ export function AIEvaluationSearch({
   );
 
   return (
-    <div className="bg-white rounded-lg p-6 shadow-sm">
+    <motion.div
+      className="bg-white rounded-lg p-6 shadow-sm"
+      initial={{ y: 100, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <h2 className="text-lg font-semibold mb-4">AI Evaluation Report</h2>
       <p className="text-sm text-gray-600 mb-4">Search your Trainee</p>
 
@@ -117,6 +124,6 @@ export function AIEvaluationSearch({
           Search
         </Button>
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import { Chart } from "../../features/trainer/components/Chart";
 import { MeetingCalendar } from "../../features/trainer/components/MeetingCalendar";
 import { useGetMeetings } from "@/features/trainer/hooks/use-get-meetings";
@@ -47,7 +48,12 @@ export default function TrainerMainSection() {
         <Chart />
 
         {/* Meeting schedule card */}
-        <div className="bg-[#222222] rounded-lg p-6 shadow-sm">
+        <motion.div
+          className="bg-[#222222] rounded-lg p-6 shadow-sm"
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <h2 className="text-lg font-semibold text-white mb-4">
             Meeting Schedule
           </h2>
@@ -58,7 +64,7 @@ export default function TrainerMainSection() {
               month={currentMonth}
             />
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* AI Evaluation Report card */}

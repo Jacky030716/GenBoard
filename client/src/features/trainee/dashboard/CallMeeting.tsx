@@ -1,10 +1,17 @@
+import { motion } from "motion/react";
+
 import { NavLink } from "react-router";
 import { Button } from "@/components/ui/button";
 import { AudioLines } from "lucide-react";
 
 export const CallMeeting = () => {
   return (
-    <div className="xl:col-span-3 w-full h-full bg-white rounded-2xl overflow-hidden shadow-md font-montserrat  flex flex-col justify-between gap-6 p-6">
+    <motion.div
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="xl:col-span-3 w-full h-full bg-white rounded-2xl overflow-hidden shadow-md font-montserrat  flex flex-col justify-between gap-6 p-6"
+    >
       <div className="space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between font-montserrat">
@@ -38,6 +45,6 @@ export const CallMeeting = () => {
           </div>
         </NavLink>
       </Button>
-    </div>
+    </motion.div>
   );
 };

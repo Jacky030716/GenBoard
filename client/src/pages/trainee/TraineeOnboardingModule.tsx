@@ -26,7 +26,7 @@ const TraineeOnboardingModule = () => {
   return (
     <div className="flex h-full">
       {/* Sidebar */}
-      <div className="w-[260px] flex-shrink-0">
+      <div className="w-[280px] flex-shrink-0">
         <PlanSidebar tasks={onboardingPlan} currentPlan={month} />
       </div>
 

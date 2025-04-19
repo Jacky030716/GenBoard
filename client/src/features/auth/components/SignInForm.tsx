@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router";
 import { useLoginUser } from "../hooks/use-login-user";
 import { AuthCard } from "./AuthCard";
 import { TraineeBot, TrainerBot } from "@/assets";
+import { Loader2Icon } from "lucide-react";
 
 // type formSchema = z.infer<typeof signInSchema>;
 
@@ -35,11 +36,13 @@ export const SignInForm = () => {
           role="Trainee"
           img={TraineeBot}
           onClick={() => handleLogin("trainee")}
+          isPending={login.isPending}
         />
         <AuthCard
           role="Trainer"
           img={TrainerBot}
           onClick={() => handleLogin("trainer")}
+          isPending={login.isPending}
         />
 
         {/* <Button
@@ -62,6 +65,14 @@ export const SignInForm = () => {
           </div>
         </Button> */}
       </div>
+
+      {/* Add loading text */}
+      {login.isPending && (
+        <div className="flex w-full items-center gap-2 justify-center text-center">
+          <Loader2Icon className="animate-spin size-4" />
+          <p>Redirecting you to the dashboard</p>
+        </div>
+      )}
 
       <div className="flex flex-col items-center gap-2 mt-8">
         <Button

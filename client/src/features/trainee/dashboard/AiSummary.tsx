@@ -1,3 +1,5 @@
+import { motion } from "motion/react";
+
 import { Genbot } from "@/assets";
 import { useGetResult } from "../onboarding/onboarding-plan/hooks/use-get-result";
 import { Button } from "@/components/ui/button";
@@ -38,7 +40,12 @@ export const AiSummary = () => {
   }
 
   return (
-    <div className="xl:col-span-3 h-full bg-white rounded-2xl overflow-hidden shadow-md font-montserrat p-6 flex flex-col gap-6">
+    <motion.div
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="xl:col-span-3 h-full bg-white rounded-2xl overflow-hidden shadow-md font-montserrat p-6 flex flex-col gap-6"
+    >
       {/* Header */}
       <div className="h-full w-full flex flex-col gap-6 font-montserrat text-black">
         <h2 className="text-xl w-full font-semibold text-center flex items-center gap-2">
@@ -106,6 +113,6 @@ export const AiSummary = () => {
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };

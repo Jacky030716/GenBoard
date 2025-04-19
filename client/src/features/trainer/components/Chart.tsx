@@ -1,3 +1,5 @@
+import { motion } from "motion/react";
+
 import {
   Cell,
   Legend,
@@ -58,7 +60,12 @@ export const Chart = () => {
   }
 
   return (
-    <div className="bg-white rounded-lg p-6 shadow-sm flex justify-center items-center relative">
+    <motion.div
+      className="bg-white rounded-lg p-6 shadow-sm flex justify-center items-center relative"
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <div className="flex items-center justify-between mb-4">
         <div className="h-[500px] w-[500px]">
           <ResponsiveContainer width="100%" height="100%">
@@ -93,6 +100,6 @@ export const Chart = () => {
           Total Trainee : {totalTrainees}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };

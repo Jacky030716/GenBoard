@@ -8,7 +8,12 @@ const AuthLayout = () => {
       <div className="h-full flex items-center justify-center">
         <div className="flex-1 h-screen flex flex-col gap-8 justify-center items-center text-white">
           <div className="w-[400px]  animate-float relative flex flex-col items-center justify-center">
-            <img src={BigRobot} alt="Auth Logo" className="w-full" />
+            <img
+              src={BigRobot}
+              alt="Auth Logo"
+              className="w-full"
+              loading="eager"
+            />
             <div className="absolute bottom-0 w-[250px] h-[15px] rounded-full bg-white opacity-30 blur-lg shadow-xl z-[-1]"></div>
           </div>
           <div className="space-y-2 text-center font-poppins">

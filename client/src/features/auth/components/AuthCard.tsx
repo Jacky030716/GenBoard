@@ -4,12 +4,13 @@ interface AuthCardProps {
   role: "Trainer" | "Trainee";
   img: string;
   onClick: () => void;
+  isPending?: boolean;
 }
 
-export const AuthCard = ({ role, img, onClick }: AuthCardProps) => {
+export const AuthCard = ({ role, img, onClick, isPending }: AuthCardProps) => {
   return (
     <Card
-      onClick={onClick}
+      onClick={!isPending ? onClick : undefined}
       className="w-full border-t-2 border-r-4 border-rose-50/50 rounded-xl hover:shadow-md hover:shadow-rose-200 cursor-pointer transition-all duration-300 ease-in-out font-poppins group"
     >
       <CardContent className="flex xl:flex-col flex-row items-center gap-4 px-4 py-6">

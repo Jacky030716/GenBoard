@@ -1,3 +1,5 @@
+import { motion } from "motion/react";
+
 import {
   Module1,
   Module2,
@@ -11,6 +13,20 @@ import { OnboardingPlan } from "./OnboardingPlan";
 import { OnboardingProgressBar } from "./OnboardingProgressBar";
 import { useNavigate } from "react-router";
 import { useGetTraineeProgress } from "./hooks/use-get-trainee-progress";
+
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.3,
+    },
+  },
+};
+
+const childVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
 
 export const OnboardingMainSection = () => {
   const navigate = useNavigate();
@@ -69,41 +85,64 @@ export const OnboardingMainSection = () => {
       <OnboardingProgressBar />
 
       {/* Courses List */}
-      <div className="w-full grid xl:grid-cols-3 grid-cols-1 gap-8 mt-12">
-        <OnboardingPlan
-          month={1}
-          title="Getting Started"
-          bg={OnboardingBackground1}
-          moduleImg={Module1}
-          description="Learn about the company, set up your development tools, and understand Git basics."
-          availableDate="4 May 2025"
-          isCompleted={isCompleted("1.7.7")}
-          isDisabled={false}
-          onButtonClick={() => handleCourseAction("month1")}
-        />
-        <OnboardingPlan
-          month={2}
-          title="Learn & Practice"
-          description="Get familiar with the project structure, learn React, and complete your first task."
-          availableDate="5 June 2025"
-          bg={OnboardingBackground2}
-          moduleImg={Module2}
-          isCompleted={isCompleted("2.3.7")}
-          isDisabled={!traineeProgress?.currentIndex?.startsWith("2")}
-          onButtonClick={() => handleCourseAction("month2")}
-        />
-        <OnboardingPlan
-          month={3}
-          title="Contribute & Demo"
-          description="Join the team workflow, finish a full task, and show your work."
-          availableDate="5 July 2025"
-          bg={OnboardingBackground3}
-          moduleImg={Module3}
-          isCompleted={isCompleted("3.2.6")}
-          isDisabled={!traineeProgress?.currentIndex?.startsWith("3")}
-          onButtonClick={() => handleCourseAction("month3")}
-        />
-      </div>
+      <motion.div
+        className="w-full grid xl:grid-cols-3 grid-cols-1 gap-8 mt-12"
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+      >
+        {[1, 2, 3].map((month, index) => (
+          <motion.div key={month} variants={childVariants}>
+            <OnboardingPlan
+              month={month}
+              title={
+                month === 1
+                  ? "Getting Started"
+                  : month === 2
+                  ? "Learn & Practice"
+                  : "Contribute & Demo"
+              }
+              description={
+                month === 1
+                  ? "Learn about the company, set up your development tools, and understand Git basics."
+                  : month === 2
+                  ? "Get familiar with the project structure, learn React, and complete your first task."
+                  : "Join the team workflow, finish a full task, and show your work."
+              }
+              availableDate={
+                month === 1
+                  ? "4 May 2025"
+                  : month === 2
+                  ? "5 June 2025"
+                  : "5 July 2025"
+              }
+              bg={
+                month === 1
+                  ? OnboardingBackground1
+                  : month === 2
+                  ? OnboardingBackground2
+                  : OnboardingBackground3
+              }
+              moduleImg={
+                month === 1 ? Module1 : month === 2 ? Module2 : Module3
+              }
+              isCompleted={
+                month === 1
+                  ? isCompleted("1.7.7")
+                  : month === 2
+                  ? isCompleted("2.3.7")
+                  : isCompleted("3.2.6")
+              }
+              isDisabled={
+                month === 1
+                  ? false
+                  : !traineeProgress?.currentIndex?.startsWith(`${month}`)
+              }
+              onButtonClick={() => handleCourseAction(`month${month}`)}
+            />
+          </motion.div>
+        ))}
+      </motion.div>
     </div>
   );
 };
