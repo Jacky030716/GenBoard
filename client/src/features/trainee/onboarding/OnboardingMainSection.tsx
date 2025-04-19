@@ -39,7 +39,7 @@ export const OnboardingMainSection = () => {
 
   const isCompleted = (lastTask: string) => {
     const isExist = traineeProgress?.result?.some((task: any) => {
-      return task.index.startsWith(lastTask) && task.isCompleted;
+      return task?.index?.startsWith(lastTask) && task?.isCompleted;
     });
 
     return isExist;
