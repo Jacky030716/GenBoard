@@ -15,6 +15,8 @@ export const Chatbot = () => {
 
   const clientId = "0d501df1-4bbb-4536-a788-75bf5f735dec";
 
+  // https://cdn.botpress.cloud/webchat/v2.3/shareable.html?configUrl=https://files.bpcontent.cloud/2025/04/18/14/20250418144158-EGDKN64M.json
+
   const configuration: Configuration = {
     botAvatar: Genbot,
     botName: "GenBot",

@@ -3,16 +3,8 @@ import { useGetResult } from "../onboarding/onboarding-plan/hooks/use-get-result
 import { Button } from "@/components/ui/button";
 import { useGetAiEvaluationResult } from "./hooks/use-get-ai-evaluate-result";
 import { useAiEvaluateResult } from "./hooks/use-ai-evaluate-result";
-
-const strengths = [
-  "Excellent quiz accuracy (avg. score: 92%)",
-  "Consistent weekly task submissions",
-];
-
-const weaknesses = [
-  "Progress occasionally slowed during Week 3 and 5",
-  "Limited feedback provided during peer reviews",
-];
+import { queryClient } from "@/main";
+import { Bot } from "lucide-react";
 
 export const AiSummary = () => {
   const uid = localStorage.getItem("uid") as string;
@@ -20,13 +12,17 @@ export const AiSummary = () => {
   const { evaluationResult, isLoading: getEvaluationLoading } =
     useGetAiEvaluationResult(uid);
 
-  console.log("evaluationResult", evaluationResult);
-
   const { evaluateResult, isLoading: evaluationLoading } =
     useAiEvaluateResult();
 
   const handleEvaluate = async () => {
-    evaluateResult(existingResult?.result);
+    evaluateResult(existingResult?.result, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ["aiEvaluationResult", uid],
+        });
+      },
+    });
   };
 
   const requiredTasks = existingResult?.result?.length || 0;
@@ -44,12 +40,13 @@ export const AiSummary = () => {
   return (
     <div className="md:col-span-3 h-full bg-white rounded-2xl overflow-hidden shadow-md font-montserrat p-6 flex flex-col gap-6">
       {/* Header */}
-      <div className="h-full w-full flex flex-col font-montserrat text-black">
-        <h2 className="text-xl w-full font-semibold text-center">
+      <div className="h-full w-full flex flex-col gap-6 font-montserrat text-black">
+        <h2 className="text-xl w-full font-semibold text-center flex items-center gap-2">
+          <Bot size={24} />
           GenBoard AI Trainer Evaluation
         </h2>
 
-        <div className="flex-1 flex justify-center items-center p-8 space-y-4">
+        <div className="flex-1 flex justify-center items-center space-y-4">
           {/* If the user does not have any evaluation result */}
           {!evaluationResult ? (
             <div className="flex flex-col gap-4 items-center justify-center">
@@ -71,12 +68,14 @@ export const AiSummary = () => {
               </div>
             </div>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-6">
               {/* Strengths section */}
-              <div>
+              <div className="bg-sky-50 p-6 rounded-lg">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="size-3 bg-blue-500 rotate-45"></div>
-                  <h3 className="font-bold text-lg">Strengths:</h3>
+                  <h3 className="font-bold text-lg text-blue-500">
+                    Strengths:
+                  </h3>
                 </div>
                 <ul className="list-disc ml-6 space-y-1">
                   {evaluationResult?.strength.map(
@@ -88,10 +87,12 @@ export const AiSummary = () => {
               </div>
 
               {/* Weaknesses section */}
-              <div>
+              <div className="bg-yellow-50 p-6 rounded-lg">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-3 h-3 bg-amber-400 rotate-45"></div>
-                  <h3 className="font-bold text-lg">Weaknesses:</h3>
+                  <h3 className="font-bold text-lg text-amber-500">
+                    Weaknesses:
+                  </h3>
                 </div>
                 <ul className="list-disc ml-6 space-y-1">
                   {evaluationResult?.weakness.map(
